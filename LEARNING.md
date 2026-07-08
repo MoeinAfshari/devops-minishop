@@ -89,3 +89,36 @@ Read = 4, Write = 2, Execute = 1
 8. When source of a symlink deleted, the symlink __broken__!
 9. Hard links cannot span physical devices & they cannot reference directories, only files
 
+
+# Day 3
+
+## What I learned
+
+- Define Processes
+- Manage Services
+- Installing & deleting Packages
+- Read Logs
+- Difference of Process and Service
+- ps
+- pgrep
+- pidof
+- systemctl
+- apt
+- journalctl
+- dmesg
+
+## Challenges
+
+1. What's the process? `In Linux, a process is any active(running) instance of a program.`
+2. What's the service? `A Linux service is a program that runs in the background and provides essential functionality to the system or other applcations.`
+3. What's the difference between process and service? `A service is a special kind of process.`
+
+## Notes
+
+1. Every Process has an id (PID).
+2. In computing, a parent process is a process that has created one or more child processes.
+3. pgrep looks through the currently running processes and lists the process IDs which match the selection criteria to stdout. -> `pgrep -u root nginx`, `pgrep -c nginx` (count)
+4. Pidof finds the process id's (pids) of the named programs: `pidof nginx`
+5. killall kills all dependencies too: `kill -9 1234` (kill) -> `killall -9 firefox` (killall firefox & its dependencies) | `killall -u moein nginx`
+6. pkill works with regex too: `exec -a process_1 sleep 60000 &` -> `pkill -f pro` (pkill is really dangerous)
+
