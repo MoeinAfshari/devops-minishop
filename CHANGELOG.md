@@ -3,11 +3,11 @@
 ## Day 1
 
 ### Added
-- Create Github repository
+- Created Github repository
 - Initialized MiniShop project structure
-- Learn initial commands of linx
-- Create project documentation
-- Create initial Github Issues
+- Learned initial commands of linx
+- Created project documentation
+- Created initial Github Issues
 
 ---
 
@@ -15,8 +15,8 @@
 
 ### Added
 - Linux architecture documnetation
-- Create `system-info.sh` Bash script
-- Create `LEARNING.md`
+- Created `system-info.sh` Bash script
+- Created `LEARNING.md`
 
 ### Improved
 - Updated project documentation
@@ -34,4 +34,20 @@
 ### Imporved
 - Improved `system-info.sh` Bash script
 - Updated `LEARNING.md`
+
+---
+
+## Day 4
+
+### Added
+- Learned Package Manager & Repositories
+- Practiced System Health Check
+- Created `monitoring/README.md`
+- Created `scripts/README.md`
+- Created `scripts/health-check.sh`
+- Created `Add system monitoring documentation` Issue
+
+### Improved
+- Updated `LEARNING.md`
+- Updated `CHANGELOG.md`
 

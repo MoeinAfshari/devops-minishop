@@ -122,3 +122,24 @@ Read = 4, Write = 2, Execute = 1
 5. killall kills all dependencies too: `kill -9 1234` (kill) -> `killall -9 firefox` (killall firefox & its dependencies) | `killall -u moein nginx`
 6. pkill works with regex too: `exec -a process_1 sleep 60000 &` -> `pkill -f pro` (pkill is really dangerous)
 
+
+# Day 4
+
+## Waht I learned
+
+- Manage Packages
+- Define APT Repositories
+- Read System Logs
+- Check RAM, CPU & Disk Status
+
+## Challenges
+
+1. What does journalctl do? `journalctl manages logs and it shows them to valid users.`
+2. What's the difference between dmesg & journalctl? `Both journalctl and dmesg can provide logs produced by the kernel. This will usually include the various device probe messages during the boot sequence, as well as any further messages outputted by the kernel during the running of the system.`
+
+## Notes
+
+- If a server's RAM is full, what are the first commands you run? `free -> top -> ps -> Check the reason -> kill PID -> If doesn't close -> kill -9 PID`
+- If a server's RAM is full, what are the first commands you run? `free -> top -> ps -> Check the reason -> kill PID -> If doesn't close -> kill -9 PID`
+
+
