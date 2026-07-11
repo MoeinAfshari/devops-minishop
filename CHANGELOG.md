@@ -51,3 +51,15 @@
 - Updated `LEARNING.md`
 - Updated `CHANGELOG.md`
 
+## Day 5
+
+### Added
+- Learned variales & inputs
+- Learned if, for, while & exit code
+- Created `scripts/server-info.sh`
+- Created `Implement interactive server information script` Issue
+
+### Improved
+- Updated `scripts/README.md`
+- Updated `LEARNING.md`
+- Updated `CHANGELOG.md`
