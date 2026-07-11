@@ -66,4 +66,13 @@ fi
 
 }
 
+# the first script running 
 prompt
+read -rp "Do you want to continue? (y/n)" answer
+
+# if user wanted, prompt function run again
+while [ "$answer" = 'y' ]
+do
+  prompt
+  read -rp "Do you want to continue? (y/n)" answer
+done
