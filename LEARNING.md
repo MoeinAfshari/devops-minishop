@@ -139,7 +139,33 @@ Read = 4, Write = 2, Execute = 1
 
 ## Notes
 
-- If a server's RAM is full, what are the first commands you run? `free -> top -> ps -> Check the reason -> kill PID -> If doesn't close -> kill -9 PID`
-- If a server's RAM is full, what are the first commands you run? `free -> top -> ps -> Check the reason -> kill PID -> If doesn't close -> kill -9 PID`
+1. If a server's RAM is full, what are the first commands you run? `free -> top -> ps -> Check the reason -> kill PID -> If doesn't close -> kill -9 PID`
+2. If a server's RAM is full, what are the first commands you run? `free -> top -> ps -> Check the reason -> kill PID -> If doesn't close -> kill -9 PID`
 
 
+# Day 5
+
+## What I learned
+
+- Define Variables
+- Get Input from User
+- Write If Conditions
+- Write For & While Loops
+- Create Functions
+- Define Exit code
+- Write an Interactive Bash Script
+
+## Challenges
+
+1. What's the difference between "$USER" and USER? `$USER expands the value of the USER environment variable, while USER without $ is treated as plain string (unless used in a different shell context)`.
+2. What's the difference between read and echo? `read gets an input from user but echo shows an output to user`.
+3. Why do use from function in bash? `We usually use from functions to avoid repetitive tasks and adhere to the DRY (Don't Repeat Yourself) principle. functions also improve code readability and maintainablility`.
+4. What's the difference between for and while? `for usually uses for a fixed number of iterations but while usually checks a condition and repeat some tasks as long as the condition is met`.
+5. What's Exit Code and why is 0 value important? `Every command has a return value in bash as exit code and if the commad was correct, its exit code is 0`.
+6. What are the five basic commands to fix a slow server? `top` -> `free -h` -> `df -h` -> `ps aux --sort=-%mem | head` | `ps aux --sort=-%cpu | head` -> `journalctl -xe` | `dmesg`
+
+## Notes
+
+1. If you wanna print only the files: `ls -p | grep -v /`.
+2. Variable Scopes: If you even define a variable in a function, it's global; Write that as local: `local variable="variable_value"` in the function.
+3. A good DevOps: Observe -> Analyze -> Act -> Hope :)
