@@ -6,6 +6,9 @@
 # Description: Display minishop server information
 # ============================
 
+
+# server information functions
+
 system_info() {
   sys_info="$(hostnamectl)"
   printf "\nSystem Information\n================\n%s\n" "$sys_info"
@@ -33,46 +36,74 @@ show_all() {
   cpu_cores
 }
 
+
+# prompt function
+
 prompt() {
-
-# initial prompt
-printf "===================\n"
-printf "MiniShop Server Information\n"
-printf "===================\n"
-
-# show items to select by user
-printf "Show:\n\n"
-printf "1- System Info\n\n"
-printf "2- Disk\n\n"
-printf "3- RAM\n\n"
-printf "4- CPU\n\n"
-printf "5- All\n\n"
-read -rp "Select an option: " selection
-
-# condition for answer to user
-if [ "$selection" = "1" ];then
-  system_info
-elif [ "$selection" = "2" ];then
-  disk_info
-elif [ "$selection" = "3" ];then
-  ram_info
-elif [ "$selection" = "4" ];then
-  cpu_cores
-elif [ "$selection" = "5" ];then
-  show_all
-else
-  printf "\nWrong selection!\n"
-fi
-
+  # initial prompt
+  printf "===================\n"
+  printf "MiniShop Server Information\n"
+  printf "===================\n"
+  # show items to select by user
+  printf "Show:\n\n"
+  printf "1- System Info\n\n"
+  printf "2- Disk\n\n"
+  printf "3- RAM\n\n"
+  printf "4- CPU\n\n"
+  printf "5- All\n\n"
+  printf "6- Exit\n\n"
 }
 
-# the first script running 
-prompt
-read -rp "Do you want to continue? (y/n)" answer
 
-# if user wanted, prompt function run again
-while [ "$answer" = 'y' ]
-do
-  prompt
-  read -rp "Do you want to continue? (y/n)" answer
-done
+# user selection function
+
+select_item() {
+  read -rp "Select an option: " selection
+  
+  # condition for answer to user
+  case "$selection" in
+  1)
+    system_info
+    ;;
+  2)
+    disk_info
+    ;;
+  3)
+    ram_info
+    ;;
+  4)
+    cpu_cores
+    ;;
+  5)
+    show_all
+    ;;
+  6)
+    exit 0
+    ;;
+  *)
+    printf "Wrong number entered!"
+    ;;
+  esac
+  
+  # continue or not
+  read -rp "Do you want to continue?(y/n) " answer
+}
+
+
+# main function
+
+main() {
+  answer="y"
+  while [ "$answer" = "y" ]
+  do
+    prompt
+    select_item
+  done
+  # if user answer was n (no)
+  printf "Goodbye!"
+  exit 0
+}
+
+
+# start the script
+main
