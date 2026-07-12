@@ -169,3 +169,32 @@ Read = 4, Write = 2, Execute = 1
 1. If you wanna print only the files: `ls -p | grep -v /`.
 2. Variable Scopes: If you even define a variable in a function, it's global; Write that as local: `local variable="variable_value"` in the function.
 3. A good DevOps: Observe -> Analyze -> Act -> Hope :)
+
+
+# Day 6
+
+## What I learned
+
+- Use Case
+- Understand commandline Arguments
+- Use Exit Code
+- Write a professional bash script
+
+## Challenges
+
+1. What's the difference between $* and "$@"? `"$*" expands all positional parameters into a single string, while "$@" expands them as seperate arguments, preserving each argument individually`.
+2. What's the difference between exit 0 and return 0? `return is uded to exit a function and return control to the caller, while exit terminates the entire script or shell process with the specific exit status`.
+3. Why is case better than if for menus? `case is better for menus because users choose from a fixed set of options. if statements are more suitable for evaluation logical or complex conditions`.
+4. What does $0 return? `$0 returns the script file name or your shell name in the commandline and echo $0 prints it`.
+5. What does it mean if a script ends with exit 1? `It means exit from program and terminate it right now. The script exits with status code 1, which usually indicates an error. A non-zero exit status indicates an error or abnormal termination.` 
+
+## Notes
+
+1. Variables naming rules:
+- It can includes numbers, letters, underscore
+- Don't start with numbers
+- Don't use reserve names: if, elif, else, then, while, do, done, for, until, case, esac, break, continue, function, _
+2. Script Header: shebang, Script, Author, Description
+3. When every function just does one task, it calls Single Responsibility Principle.
+4. Use these functions help to adhere DRY Principle
+

@@ -63,3 +63,17 @@
 - Updated `scripts/README.md`
 - Updated `LEARNING.md`
 - Updated `CHANGELOG.md`
+
+## Day 6
+
+### Added 
+- Learned Case
+- Learned Arguments
+- Learned Exit Codes
+
+### Improved
+- Updated `script/health-check.sh`
+- Updated `script/system-info.sh`
+- Updated `script/server-info.sh`
+- Updated `LEARNING.md`
+- Updated `CHANGELOG.md`
