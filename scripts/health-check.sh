@@ -6,15 +6,42 @@
 # Description: Display basic system health information
 # =======================================
 
-# ram usage
-read -r used free <<< "$(free -h | awk '/Mem:/ {print $3, $4}')"
-printf "RAM Usage: used %s, free %s\n" "$used" "$free"
+ram_usage() {
+  read -r used free <<< "$(free -h | awk '/Mem:/ {print $3, $4}')"
+  printf "RAM Usage: used %s, free %s\n" "$used" "$free"
+}
 
-# root disk usage
-printf "Root Disk Usage: %s is used\n" "$(df -h / | awk 'NR==2 {print $5}')"
+root_disk() {
+  disk_usage="$(df -h / | awk 'NR==2 {print $5}')"
+  printf "Root Disk Usage: %s is used\n" "$disk_usage"
+}
 
-printf "CPU Count: %s cores\n" "$(nproc)"
+cpu_cores() {
+  cpu_c="$(nproc)"
+  printf "CPU Count: %s cores\n" "$cpu_c"
+}
 
-printf "Uptime: %s\n" "$(uptime -p)"
+uptime_time() {
+  u_time="$(uptime -p)"
+  printf "Uptime: %s\n" "$u_time"
+}
 
-printf "Current User: %s\n" "$USER"
+current_user() {
+  printf "Current User: %s\n" "$USER"
+}
+
+prompt() {
+  printf "========================\n"
+  printf "Health Check Information\n"
+  printf "========================\n"
+}
+
+show_all() {
+  prompt
+  ram_usage
+  root_disk
+  uptime_time
+  current_user
+}
+
+show_all
