@@ -11,7 +11,8 @@
 
 system_info() {
   sys_info="$(hostnamectl)"
-  printf "\nSystem Information\n================\n%s\n" "$sys_info"
+  printf "\nSystem Information\n"
+  printf "================\n%s\n" "$sys_info"
 } 
 
 disk_info() {
@@ -25,8 +26,7 @@ ram_info() {
 }
 
 cpu_cores() {
-  cpu_c="$(nproc)"
-  printf "\nNumber of CPU Cores: %s\n" "$cpu_c"
+	printf "\nNumber of CPU Cores: %s\n" "$(nproc)"
 }
 
 show_all() {
@@ -35,9 +35,6 @@ show_all() {
   ram_info
   cpu_cores
 }
-
-
-# prompt function
 
 prompt() {
   # initial prompt
