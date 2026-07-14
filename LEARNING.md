@@ -198,3 +198,39 @@ Read = 4, Write = 2, Execute = 1
 3. When every function just does one task, it calls Single Responsibility Principle.
 4. Use these functions help to adhere DRY Principle
 
+# Day 7
+
+## What I learned
+
+- Review
+
+## Challenges
+
+1. What's the difference between a process and a service? `A process is a running instance of a program. A service is a long-running process that usually runs in the background and is managed by a service manager such as systemd.`
+2. What's the difference between a shell and a terminal? `A terminal is an application that provides access to a shell (like Gnome Terminal, Konsole, xterm, Windows Terminal, ...). A shell is a command-line interpreter that executes commands (like bash, zsh, sh, fish, ...).`
+3. Why is Git important for DevOps engineers? `Version Control System (VCS) is really important in any software deployment and even DevOps, because with using it, we can manage the tasks from plan to release. Git is the most popular version control system.`
+4. Why should scripts return proper exit codes?
+`Exit codes allow other scripts and automation tools to determine whether a command successed or failed.`
+5. What makes a Bash script maintainable? `A maintainable Bash script uses meaningful variable names, small functions, proper comments, consistent formatting, and follows the DRY principle.`
+
+## Notes
+
+1. One of co-workers say: "I run the script but I get permission denied!"
+You are only allowed run 5 commands.
+Write:
+  1. What commands do you run?
+  2. Why do you choose each one?
+  3. At what point do you decide whether the problem is with Permissions, the file owner, or the file path?
+  **Answer**:
+  1. `whoami` | `echo "$USER"` -> I verify which user is executing the script because the current user may not have permission to execute or access the file.
+  2. `id` -> I check the groups that the user is in them.
+  3. `stat script.sh` -> I check the permissions of file, owner, group, ...
+  4. `namei -l /path/to/script.sh` -> This command is really popular Linux tool for debug permissions. (If a directory doesn't have Execute Permission, I get permission denied)
+  5. `journalctl -xe` -> After run script and get permission denied, check the last logs.
+2. Explain the Linux boot process briefly. The firmware performs the POST, loads the bootloader(GRUB), which loads the Linux kernel. The kernel then starts the init system (usually systemd, PID 1), which initializes the system and starts servivces.
+3. What happens when you run a command in Bash? The shell searches for the command in the directories listed in the `$PATH` environment variable. If the command is found, the shell executes it and returns an exit status. 
+4. Why is Git essential in DevOps? A devops engineer almost needs a version control system for everything that wants to do like Collaboration, History, Rollback, CI/CD. Git is the most popular version control system.
+5. How do you debug a bash script? You can check the syntax of a bash script with `bash -n script.sh` and debug it with `bash -x script.sh`.
+6. What is the difference between ps and top? `ps` displays a snapshot of running processes, while `top` provides a real-time, iteractive view of system resources and processes.
+7. What would you check first if a Linux server became slow? I check the `top` in the first for figure out what processes have the most resources usage and what part has emergency status, ram, cpu, disk or ...
+
