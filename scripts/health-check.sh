@@ -7,23 +7,21 @@
 # =======================================
 
 ram_usage() {
-  read -r used free <<< "$(free -h | awk '/Mem:/ {print $3, $4}')"
-  printf "RAM Usage: used %s, free %s\n" "$used" "$free"
+  read -r total used free <<< "$(free -h | awk '/Mem:/ {print $2, $3, $4}')"
+  printf "RAM Usage: total size %s, used %s, free %s\n" "$total" "$used" "$free"
 }
 
 root_disk() {
-  disk_usage="$(df -h / | awk 'NR==2 {print $5}')"
-  printf "Root Disk Usage: %s is used\n" "$disk_usage"
+  read -r size used avail use <<< "$(df -h / | awk 'NR==2 {print $2, $3, $4, $5}')"
+  printf "Root Disk Usage: %s is total size, %s(%s) is used, %s is available\n" "$size" "$use" "$used" "$avail"
 }
 
 cpu_cores() {
-  cpu_c="$(nproc)"
-  printf "CPU Count: %s cores\n" "$cpu_c"
+  printf "CPU Count: %s cores\n" "$(nproc)"
 }
 
 uptime_time() {
-  u_time="$(uptime -p)"
-  printf "Uptime: %s\n" "$u_time"
+  printf "Uptime: %s\n" "$(uptime -p)"
 }
 
 current_user() {
@@ -36,6 +34,7 @@ prompt() {
   printf "========================\n"
 }
 
+# show all health checking information function
 show_all() {
   prompt
   ram_usage
@@ -44,4 +43,5 @@ show_all() {
   current_user
 }
 
+# show all
 show_all
