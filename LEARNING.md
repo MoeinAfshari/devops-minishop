@@ -234,3 +234,26 @@ Write:
 6. What is the difference between ps and top? `ps` displays a snapshot of running processes, while `top` provides a real-time, iteractive view of system resources and processes.
 7. What would you check first if a Linux server became slow? I check the `top` in the first for figure out what processes have the most resources usage and what part has emergency status, ram, cpu, disk or ...
 
+
+# Day 8
+
+## What I learned
+
+- Manage Users & Groups
+- Understand Ownership deeply
+- Configure sudo
+- Know `/etc/shadow` & `/etc/passwd` structures
+
+## Challanges
+
+1. What's the difference between `useradd` and `adduser`? `useradd` is a low-level command that creates users directly. `adduser` is a user-friendly interactive wrapper around `useradd` (on Debian-based systems) that automatically creates the home directory and prompts for additional user information.
+2. Why shouldn't you log in as `root` for daily work? According to thhe Principle of Least Privilege, users should have only the permissions they need. Administrative tasks should be performed with `sudo` instead of logging in as the root user.
+3. What's stored in `/etc/shadow`? Users password hashes and configurations  of passwords put in the `/etc/shadow` and root user just can look at it.
+4. What's the difference between `su` and `sudo`? `su` switches to another user account and starts a new shell. `sudo` executes a single command with elevated privileges (or as another specified user). it execute a command as another user (by default root). like `sudo -u user_name command`.
+5. Why do Linux systems use groups? Groups simplify permission management by assigning permissions to multiple users at once.
+6. User `developer` can't edit `/opt/app/config.yaml`. What do you do with 5 commands? `whoami` | `echo $USER` -> `id` -> `stat /opt/app/config.yaml` -> `namei -l /opt/app/config.yaml` -> `journalctl -xe` | `journalctl -u app.service`
+
+## Notes
+
+1. Get default permissions for Files: `666 - umask_number` & for Directories: `777 - umask_number`
+
