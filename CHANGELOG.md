@@ -98,12 +98,12 @@
 
 ## Day 7
 
-## Added
+### Added
 
 - Review
 - New Issue
 
-## Improved
+### Improved
 
 - Updated `script/health-check.sh`
 - Updated `script/system-info.sh`
@@ -112,3 +112,16 @@
 - Updated `CHANGELOG.md`
 - Updated `README.md`
 
+## Day 8
+
+### Added
+
+- Learned creating & managing User & Group
+- Studied `/etc/shadow` & `/etc/passwd`
+- Created `/docs/user-management.md`
+- Created new Issue
+
+### Improved
+
+- Updated `LEARNING.md`
+- Updated `CHANGELOG.md`
