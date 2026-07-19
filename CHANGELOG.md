@@ -112,6 +112,8 @@
 - Updated `CHANGELOG.md`
 - Updated `README.md`
 
+---
+
 ## Day 8
 
 ### Added
@@ -125,3 +127,22 @@
 
 - Updated `LEARNING.md`
 - Updated `CHANGELOG.md`
+
+---
+
+## Day 9
+
+### Added
+
+- Learned Advanced Permissions
+- Learned ACL
+- Added permission documentation to project (docs/permissions.md)
+- Create new Issue
+
+### Improved
+
+- Updated `LEARNING.md`
+- Updated `CHANGELOG.md`
+
+---
+
