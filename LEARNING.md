@@ -257,3 +257,32 @@ Write:
 
 1. Get default permissions for Files: `666 - umask_number` & for Directories: `777 - umask_number`
 
+# Day 9
+
+## What I learned
+
+- Know Special Permissions (Advanced Permissions)
+- Explain SUID, SGID, Sticky Bit
+- Learn ACL
+- Practice `getfacl` & `setfacl`
+
+## Challenges
+
+1. What's the difference between 777 and 755? These are numeric permissions (read:4, write:2, execute: 1); 777 means to give all permissions (read, write, execute) to every user (owner, group, other); 755 means the owner has all permissions, group & other users have read and execute permissions.
+2. Why is 777 dangerous? 777 is dangerous because every user can read, modify, and execute the file, which can lead to accidental changes, privilege abuse, or security vulnerabilities. 
+3. What's SUID? SUID is Set-User-ID. when suid adds to an excutable file, it runs with file's owner privileges instead of the user that executes it. the process runs with the file owner's privileges.
+4. What's Sticky Bit? Sticky Bit is mainly used on directories. when it adds to a directory, only the file owner, the directory owner or the root user can delete or rename files inside the directory.
+5. What's the difference between ACL and traditional permissions? Traditional Permissions allow access control only for the owner, group and others. ACL provides more fine-grained permissions, allowing specific users or groups to have different permissions without changing ownership or the main group.
+
+## Notes
+
+- Production Scenario: All users can edit `opt/app/database.conf/` and this is a security problem. How do you solve the problem without interrupting service?
+- Answer:
+1. `stat /opt/app/database.conf` -> I check the current owner, group, traditional permissions and advanced permissions.
+2. `getfacl /opt/app/database.conf` -> I check the acl status of the file.
+3. `namei -l /opt/app/database.conf` -> I check the path permissions of file too.
+4. `chmod ---- /opt/app/database.conf` -> After verifying the required access for the application, I would adjust the permissions following the Principle of Least Privilege.
+5. `setfacl -x u:username /opt/app/database.conf` -> I change file ACL permissions too if it was neccesary according to Principle of Least Privilege.
+** Before changing permissions, I verify which user and group the application or service runs as (for example, using `ps`, `systemctl`, or the service configuration). Then I apply the minimum required permissions and test that the application still works correctly. **
+
+
