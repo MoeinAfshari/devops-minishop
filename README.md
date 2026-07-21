@@ -1,6 +1,6 @@
 # DevOps MiniShop
 
-A simaple Linux-basd project for learning DevOps concepts step by step.
+A simple Linux-based project for learning DevOps concepts step by step.
 
 ---
 
@@ -12,7 +12,7 @@ This project covers:
 
 - Linux Administration
 - Bash Scripting
-- Git & Github Workflow
+- Git & GitHub Workflow
 - Networking
 - Docker
 - Docker Compose
@@ -72,7 +72,7 @@ devops-minishop/
 
 ---
 
-## Riquirements
+## Requirements
 
 - Ubuntu 24.04
 - Bash
@@ -103,9 +103,9 @@ chmod +x scripts/server-info.sh
 
 ---
 
-## Git Workfolw
+## Git Workflow
 
-Each feature is developed in a seperate branch.
+Each feature is developed in a separate branch.
 
 Example:
 
@@ -121,5 +121,73 @@ Every feature is merged into the `main` branch through a Pull Request.
 
 ## Learning Progress
 
+### Completed
+
+- Linux fundamentals
+- Bash Scripting
+- Git & GitHub
+- Linux Services
+- Process Management
+- User & Group Management
+- Linux Permissions
+- ACL
+
+
+### In Progress
+
+- Networking
 
 ## Future Plans
+
+- Docker
+- Docker Compose
+- Nginx
+- Ansible
+- CI/CD
+- Kubernetes
+- Monitoring
+
+## Networking
+
+Current Topics:
+
+- Network Basics
+- TCP/IP Model
+- TCP vs UDP
+- IPv4 Addressing
+- CIDR Notation
+- Basic Networking Commands
+
+Documentation:
+
+docs/networking/
+├── network-basics.md
+├── tcp-ip.md
+├── tcp-vs-udp.md
+└── ipv4.md
+
+## Scripts
+
+Current scripts:
+
+[Scripts & descritpion](scripts/README.md)
+
+## Documentation
+
+Project documentation is located in: [docs](docs/)
+
+Current setions:
+
+- Linux
+- Bash
+- Networking
+
+## Project Status
+
+Current Stage:
+
+week 2
+
+Current Topic:
+
+Networking Fundamentals
