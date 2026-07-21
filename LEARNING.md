@@ -286,3 +286,42 @@ Write:
 ** Before changing permissions, I verify which user and group the application or service runs as (for example, using `ps`, `systemctl`, or the service configuration). Then I apply the minimum required permissions and test that the application still works correctly. **
 
 
+# Day 10
+
+## What I learned
+
+- Explain the difference between Network, Internet, Host
+- Know TCP/IP model deeply
+- Know the difference between TCP & UDP
+- Analyze IPV4
+- Read CIDR
+- Work with networking basic tools
+
+## Challenges
+
+1. What's the difference between a Network and the Internet? A network is a connection between two or more devices but the Internet is a global network of interconnected networks.
+2. What's the difference between a Client and a Server? A client is a device or application that requests services or resources. A server is a device or application that provides services or resources to clients.
+3. Explain the TCP/IP model. The TCP/IP model is a layered networking framework that explains how data is communicated between devices over a network using standardized protocols to ensure reliable and effecient transmission. It consists of four layers: Apllication, Transport, Internet, and Network Access.
+4. What's the difference between TCP and UDP? TCP checks for errors and retransmits lost packets, which makes it reliable. UDP doesn't retransmit lost packets and focuses on low latency and speed.
+5. Why does SSH use TCP instead of UDP? SSH requires reliable, ordered, and error-checked communication, which TCP provides.
+6. What is a subnet mask? A subnet mask is 32-bit number used in IPv4 networking that helps divide an IP address into two components: the network prtion and the host portion.
+7. Explain the difference between a Router and a Switch? A router connects different networks and forwards packets between them. A switch connects devices within the same local network (     LAN).
+8. What is a default gateway? A default gateway is the network node, ususally a router, that devices use to access other networks when no other routes are specified.
+1285 6. Which protocols usse TPC and which use UDP? HTTP, HTTPS, SSH, ... use TCP;DHCP, NTP, ... use UDP. DNS usually uses UDP, but it can also uses TCP in some cases.
+
+## Notes
+
+The development team has reported that the server has access to the Internet but can't connect to an internal server with address `10.10.10.20`.
+
+What's the solution?
+
+1. `ping 4.2.2.4` -> I ensure that the Interntet works.
+2. `ping 10.10.10.20` -> I check the destination address.
+3. `ip route` -> I need to find out there is any router for `10.10.10.0` network or not. for example if the output was:
+```bash
+default via 192.168.1.1
+192.168.1.0/24 dev eth0
+```
+If there wasn't any route for `10.10.10.0/24`, you find the problem.
+4. `ip addr` -> Where am I (inet 127.0.0.1/8 means subnet mask: 255.0.0.0, Network address: 127.0.0.0, Host address: 127.0.0.1, Broadcast: 127.255.255.255)? for example if my network is `192.168.1.50/24` for receive to `10.10.10.20`, I need to a router.
+5. `traceroute 10.10.10.20` | `tracepath 10.10.10.20` show the packet go to where and where stops.
