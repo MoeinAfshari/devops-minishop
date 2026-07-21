@@ -146,3 +146,26 @@
 
 ---
 
+## Day 10
+
+### Added
+
+- Learned network basics
+- Learned TCP/IP Model
+- Learned CIDR & IPv4
+- Created docs/Networking
+- Created docs/Networking/network-basics.md
+- Created docs/Networking/tcp-ip.md
+- Created docs/Networking/tcp-vs-udp.md
+- Created docs/Networking/ipv4.md
+- Created docs/Linux
+- Created docs/Bash
+- New Issue
+
+### Improved
+
+- Updated README.md
+- Updated docs/Linux
+- Updated docs/Networking
+- Updated LEARNING.md
+- Updated CHANGELOG.md
