@@ -325,3 +325,53 @@ default via 192.168.1.1
 If there wasn't any route for `10.10.10.0/24`, you find the problem.
 4. `ip addr` -> Where am I (inet 127.0.0.1/8 means subnet mask: 255.0.0.0, Network address: 127.0.0.0, Host address: 127.0.0.1, Broadcast: 127.255.255.255)? for example if my network is `192.168.1.50/24` for receive to `10.10.10.20`, I need to a router.
 5. `traceroute 10.10.10.20` | `tracepath 10.10.10.20` show the packet go to where and where stops.
+
+
+# 11
+
+## What I learned
+
+- Explain MAC Address
+- What's the difference between IP and MAC?
+- Know ARP
+- Know Default Gateway deeply
+- Learn Routing
+- Work with important networking tools
+
+## Challenges
+
+1. What's the difference between an IP address and a MAC address? A MAC address is a physical address that identifies a network interface on a local network. It is usually permanent. An IP address is a logical address used to identify devices across different networks. It can be either static or dynamically assigned (DHCP).
+2. Why do we need ARP? ARP is required for map an IP address to its corresponding MAC address for local area network communication. other devices or applications usually have access to IP address only.
+3. What is a Default Gateway? A default gateway is the router that forwards packets to other networks when no specific route exists.
+4. Explain what happens when your computer sends packet to another network? If the destination is on another network, the computer sends the packet to the default gateway (Finds default gateway MAC address with using ARP). The router checks its routing table and forwards the packet toward the destination network. 
+5. What information does `ip neigh` show? It displays the current ARP (neighbor) table, including IP-to-MAC mappings and their states.
+
+## Notes
+
+1. A server has `192.168.10.20/24` IP and Default gateway has set `192.168.20.1` for that. The server couldn't connect to the Internt. What's the problem?
+**Answer:**
+
+- ```bash
+    IP Address: 192.168.10.20/24
+    Default Gateway: 192.168.20.1
+    Problem: Connection to Internet
+  ```
+- This Gateway isn't in the subnet of the server.
+- ```bash
+    Sever Network address: 192.168.10.0/24
+    Gateway:       192.168.20.1
+    subnet mask: 255.255.255.0
+    Block Size: 256
+    The first host: 192.168.10.1
+    The last host: 192.168.10.254
+  ```
+- **Note:** A gateway shoud accessibles from the LAN.
+- The main of this problem is it.
+- __Note:__ Gateway ususally is like `192.168.10.1` or `192.168.10.254`
+
+1. `ip addr` -> Check my ip, interface, CIDR, state and broadcast.
+2. `ip route` -> Check default gateway ip.
+3. `ping 192.168.10.1` -> Check the connection to the gateway.
+4. `ping 4.2.2.4` -> Check connection to the Internet.
+5. `traceroute 4.2.2.4` -> Check that where is the problem
+

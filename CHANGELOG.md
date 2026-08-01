@@ -169,3 +169,25 @@
 - Updated docs/Networking
 - Updated LEARNING.md
 - Updated CHANGELOG.md
+
+---
+
+## Day 11
+
+### Added
+
+- Learned IP and MAC
+- Learned ARP and Default Gateway
+- Learned Routing Basics
+- Created docs/Networking/arp.md
+- Created docs/Networking/ip-vs-mac.md
+- Created docs/Networking/mac-address.md
+- Created docs/Networking/routing.md
+- New Issue
+
+### Improved
+
+- Updated LEARNING.md
+- Updated CHANGELOG.md
+
+
