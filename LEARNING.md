@@ -327,7 +327,7 @@ If there wasn't any route for `10.10.10.0/24`, you find the problem.
 5. `traceroute 10.10.10.20` | `tracepath 10.10.10.20` show the packet go to where and where stops.
 
 
-# 11
+# Day 11
 
 ## What I learned
 
@@ -375,3 +375,43 @@ If there wasn't any route for `10.10.10.0/24`, you find the problem.
 4. `ping 4.2.2.4` -> Check connection to the Internet.
 5. `traceroute 4.2.2.4` -> Check that where is the problem
 
+---
+
+# Day 12
+
+## What I learned
+
+- Learn exactly what happens when you type `google.com` into your browser
+
+## Challenges
+
+1. Why do we need DNS? DNS translates human-readable domain names into IP addresses so clients can locate and communicate with servers without remembering numeric IP addresses. 
+2. What's the difference between A and CNAME? An A (Address) DNS record maps a hostname to an IPv4 address and uses for lookup while CNAME (Conanical Name) DNS record maps an alias domain name to another domain name and doesn't map to an IP.
+3. What is MX? An MX record specifies which mail server is responsible for receiving email for a domain.
+4. What's the difference between `/etc/hosts` and DNS? `/etc/hosts` is a local file and in the most Linux distros usually this file lookup in the first and then DNS server will check and this order is according to Name Service Switch (`/etc/nsswitch.conf`).
+5. What does `dig` do? `dig` is a DNS lookup utility used to query DNS servers and inspect DNS records such as A, AAAA, MX, NS, TXT, and CNAME.
+
+## Notes
+
+- Follow this format:
+```bash
+Hypothesis:
+I think ...
+
+Command:
+...
+
+Expected Output:
+...
+
+Conclusion:
+...
+```
+- `google.com` -> Server cannot resolve!
+**Answer:**
+"Server cannot resolve" probably means DNS problem, not Internet.
+1. `ping 4.2.2.4` -> Does the Internet work?
+2. `ping google.com` -> Does the DNS broke? -> If `Temporary failure in name resolution` means the DNS doesn't work.
+3. `cat /etc/resolv.conf` -> What's my resolver? -> Is it `8.8.8.8` or `127.0.0.53` or empty?
+4. `dig google.com` -> Does the DNS server answer? -> If Timeout, means the Resolver has a problem.
+5. `traceroute 8.8.8.8` (No `traceroute google.com`) -> Is the path to DNS server ok? (If DNS was broken, `google.com` doesn't resolve and so traceroute doesn't start)
