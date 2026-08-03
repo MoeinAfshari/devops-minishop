@@ -190,4 +190,21 @@
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+---
+
+## Day 12
+
+### Added
+
+- Learned DNS
+- Created docs/Networking/dns.md
+- Created docs/Networking/dns-records.md
+- Created docs/Networking/hosts-file.md
+- New Issue
+
+### Improved
+
+- Updated LEARNING.md
+- Updated CHANGELOG.md
+
 
