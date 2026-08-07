@@ -415,3 +415,56 @@ Conclusion:
 3. `cat /etc/resolv.conf` -> What's my resolver? -> Is it `8.8.8.8` or `127.0.0.53` or empty?
 4. `dig google.com` -> Does the DNS server answer? -> If Timeout, means the Resolver has a problem.
 5. `traceroute 8.8.8.8` (No `traceroute google.com`) -> Is the path to DNS server ok? (If DNS was broken, `google.com` doesn't resolve and so traceroute doesn't start)
+
+---
+
+# Day 13
+
+## What I learned
+
+- ICMP
+- Ping
+- Path Troubleshooting
+- DNS Troubleshooting
+- Port Troubleshooting
+
+## Challenges
+
+1. What's the difference between `ping` and `traceroute`? `ping` uses ICMP Echo Request and Echo Reply messages to test connectivitiy and measure latency between two hosts. `traceroute` discovers the path to the destination by sending probe packets and receiving ICMP Time Exceeded messages from itermediate routers, showing each hop along the route.
+2. Why can `ping` succeed while HTTP stil fails? Ping uses ICMP but HTTP uses TCP and may be HTTP port filtered or blocked by firewall. HTTP may also fail because the web server is down or not listening on port 80/443.
+3. What's the difference between TCP and UDP when troubleshooting? TCP provieds reliable communication using acknowledgments and retransmissions, while UDP sends packets without guaranteeing delivery, ordering, or retransmission.
+4. What does `ss -tuln` show? `ss -tuln` displays listening TCP and UDP sockets using numeric IP addresses and port numbers instead of resolving hostnames or service names. (t->TCP, u->UDP, l->Listening, n->Numeric)
+5. What does LISTEN mean? LISTEN means that a service is waiting for incoming connection requests on a specific port.
+
+## Notes
+
+### Production Scenario
+
+A user says:
+> "I can ping the server, but the website doesn't open"
+
+Answer:
+
+1. `ping server` -> Checks whether the server is reachable and measures packet loss and latency.
+2. `ss -tuln` -> Checks which TCP and UDP ports are listening on the server. (If the website is HTTP, lookup :80 and if the website is HTTPS, lookup :443)
+3. `curl -I http://server`
+4. `sudo ufw status verbose` -> Checks whether the firewall is active and which rules are configured.
+5. `systemctl status nginx`
+And if the problem doesn't solve:
+6. `journalctl -u nginx`
+
+**Workflow:**
+```bash
+Network
+   ↓
+Port
+   ↓
+HTTP
+   ↓
+Firewall
+   ↓
+Service
+   ↓
+Logs
+```
+
