@@ -207,4 +207,20 @@
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+---
 
+## Day 13
+
+### Added
+
+- Learned ICMP
+- Learned Ping, Traceroute / Tracepath
+- Learned Ports & Sockets
+- Learned DNS Troubleshooting
+- Learned Firewall
+- Created docs/Networking/network-troubleshooting.md
+
+### Improved
+
+- Updated LEARNING.md
+- Updated CHANGELOG.md
