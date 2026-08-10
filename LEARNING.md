@@ -468,3 +468,80 @@ Service
 Logs
 ```
 
+---
+
+# Day 14
+
+## What I learned
+
+- What exactly is the service and port communicating on this network?
+
+## Challenges
+
+1. What's the difference between TCP and UDP? TCP is connection-oriented and provides reliable, ordered delivery using acknowledgments, sequence numbers, and retransmissions. UDP is connectionless and provides low-overhead, best-effort delivery without guaranteeing delivery or ordering.
+2. Why does TCP use a three-way handshake? 
+```bash
+SYN
+↓
+I want to establish a connection.
+
+SYN + ACK
+↓
+I received your request, and I also want to establish a connection.
+
+ACK
+↓
+I received your response.
+
+Connection Established
+```
+3. What's the difference between a port and a socket? A port is a logical number used to indentify a network service or endpoint on a host. A socket is an endpoint identified by an IP address, port number, and transport protocol.
+4. What does `ss -tulpn` show? It shows TCP and UDP listening sockets, including the associated processes, using numeric addresses and ports.
+5. What's the difference between HTTP and HTTPS? HTTPS is HTTP over TLS. TLS provides encryption, authentication, and integrity for HTTP communication. A digital certificate is used as part of the TLS authentication process.
+6. What does `curl -I` do? It sends a HEAD request and displays the HTTP response headers without downloading the response body.
+7. What's the difference between HTTP 404, 502 and 503?
+```bash
+404
+↓
+Resource not found
+
+502
+↓
+Gateway/Proxy received an invalid response
+from the upstream server
+
+503
+↓
+Service is currently unavailable
+```
+
+## Notes
+
+1. TCP Handshake
+```bash
+Client                  Server
+
+  SYN ──────────────────→
+      ←──── SYN + ACK ───
+  ACK ──────────────────→
+
+       Connection Established
+```
+2. HTTPS
+```bash
+HTTP
+ ↓
+TLS
+ ↓
+TCP
+ ↓
+IP
+```
+3. Socket
+```bash
+IP + Port + Protocol
+        ↓
+      Socket
+
+like: 192.168.1.10:443/TCP
+```

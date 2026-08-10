@@ -224,3 +224,24 @@
 
 - Updated LEARNING.md
 - Updated CHANGELOG.md
+
+---
+
+## Day 14
+
+### Added
+
+- Learned Transport Layer
+- Learned Ports and Sockets
+- Learned HTTP & HTTPS
+- Created docs/Networking/transport-layer.md
+- Created docs/Networking/ports-and-sockets.md
+- Created docs/Networking/http-https.md
+- Created docs/Networking/curl.md
+- New Issue
+
+### Improved
+
+- Updated docs/Networking/tcp-vs-udp.md
+- Updated LEARNING.md
+- Updated CHANGELOG.md
