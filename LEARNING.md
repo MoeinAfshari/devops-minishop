@@ -545,3 +545,71 @@ IP + Port + Protocol
 
 like: 192.168.1.10:443/TCP
 ```
+
+---
+
+# Day 15
+
+## What I learned
+
+- Recognize Linux network interfaces
+- Check IP and Gateway
+- Know the difference between `ip addr` and `ip route`
+- Read and interpret route
+- Create simple static routes and remove them
+- Know `default route`
+- With `ip route get` you can find out which interface and gateway a packet sxits from
+- Troubleshoot a simple network problem step by step
+
+## Challenges
+
+1. What's the difference between `ip addr` and `ip route`? `ip addr` shows interfaces, IPs, MACs, status of interfaces & ... while `ip route` shows routing table and using routes that the kernel uses for sending packets.
+2. Analyze the Route: `default via 192.168.1.1 dev wlp4s0`? Default route uses default gateway; via means with this gateway IP; `192.168.1.1` is gateway IP; dev shows interface name; wlp4s0 is interface name.
+3. Output of `ip route get 8.8.8.8` is `8.8.8.8 via 10.0.0.1 dev eth0 src 10.0.0.50`; Answer:
+- What's Destination? It's 8.8.8.8
+- What's Gateway? It's 10.0.0.1
+- What's Interface? It's eth0.
+- What's Source IP? It's 10.0.0.50
+4. This is our situation:
+**This is one of important Troubleshooting patterns.**
+```bash
+ping 8.8.8.8       → SUCCESS
+ping google.com    → FAILED
+```
+What's the problem? The problem probably is DNS resolution problem. To ensure: `resolvectl status`, `dig google.com` and `cat /etc/resolve.conf`
+5. This is our situation:
+```bash
+ip addr → IP exists
+ip route → no default route
+```
+What's the problem? A default route didn't set. The system may have active interfaces, may have an IP, but: `default via ...` doesn't exist in the Routing Table. This can connects with some of local network hosts but doesn't have route for other networks.
+
+## Notes
+
+- When a Server says:
+> I can't connect to X.
+```bash
+1️⃣ Do I have an IP?
+       ↓
+   ip addr
+
+2️⃣ Do I have a route?
+       ↓
+   ip route
+
+3️⃣ Which route will Linux choose?
+       ↓
+   ip route get X
+
+4️⃣ Can I reach the destination?
+       ↓
+   ping X
+
+5️⃣ Is DNS the problem?
+       ↓
+   dig X
+
+6️⃣ Is the application/service reachable?
+       ↓
+   curl / ss / nc
+```

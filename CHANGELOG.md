@@ -245,3 +245,21 @@
 - Updated docs/Networking/tcp-vs-udp.md
 - Updated LEARNING.md
 - Updated CHANGELOG.md
+
+---
+
+## Day 15
+
+## Added
+
+- Learned Network Interfaces & Gateways
+- Learned Route, Routing Table
+- Created Static Routes
+- Troubleshooted a simple network
+- Created docs/Networking/linux-networking.md
+- New Issue
+
+## Improved
+
+- Updated LEARNING.md
+- Updated CHANGELOG.md
