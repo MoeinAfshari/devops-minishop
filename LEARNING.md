@@ -613,3 +613,80 @@ What's the problem? A default route didn't set. The system may have active inter
        ↓
    curl / ss / nc
 ```
+
+---
+
+# Day 16
+
+## What I learned
+
+- TCP/UDP & Port Troubleshooting
+- When a server doesn't connect to service X: Recognize the problem is from Firewall, Protocol, Port, Network, or the Service?
+
+## Challenges
+
+A user says:
+> "MiniShop won't open."
+We have these information:
+```bash
+Server IP: 192.168.100.7
+Nginx Port: 80
+Backend Port: 3000
+PostgreSQL Port: 5432
+Redis Port: 6379
+```
+
+**Questions:**
+1. What command do you run first to see if the server has an IP address? I run `ip -br addr` on the server in the first. Check IP & status of interfaces.
+2. How do you check Routing? I check routing table with `ip route` command.
+3. How do you check if Nginx is listening on port 80? I check it with `ss -tln | grep :80` and output is like `tcp LISTEN 0 511 0.0.0.0:80`.
+4. How do you find the process associated with port 80? I find process with using `sudo ss -tlnp | grep :80`. 
+5. How do you check from the client if port 80 is accessible? I run `nc -zv 192.168.100.7 80`.
+6. How do you check HTTP Response? HTTP/Application/Proxy tests by `curl -I 192.168.100.7`
+7. If port 80 is open but `curl` returns error 502, where's probably problem? The problem isn't from External Gateway or Router necassarily. 
+```bash
+502
+ ↓
+Nginx
+ ↓
+Backend unreachable
+```
+Check `curl http://127.0.0.1:3000` or `ss -tlnp | grep :3000`
+8. If Backend is listening on the `127.0.0.1:3000`, does can the Nginx connect to that on the server? Yes, Nginx can connect to the server because they are on the same server.
+9. If Backend be on the `127.0.0.1:3000`, does can connect an another server to that directly? No, Backend IP is localhost IP, so just local services can connect to it.
+10. If PostgreSQL be on the `127.0.0.1:5432`, does can connect Backend on the server to that? Yes, Backend can connect to port 5432 on the server and actually connect to PostgreSQL.
+
+## Notes
+
+### Production Scenario
+
+> Nginx is running, but users cannot access the website.
+
+What do you do?
+
+1. `ip -br addr` -> Check the iterfaces.
+2. `ip route` -> Check the routing table.
+3. `sudo ss -ltnp | grep :80` -> Check status of port 80 listeing.
+4. `sudo ufw status verbose` -> Check the server firewall.
+5. `curl -I http://127.0.0.1` -> Check the local HTTP.
+6. `curl -I http://192.168.100.7` -> Check the server IP HTTP.
+7. `nc -zv 192.168.100.7 80` -> Check the remote port from client (from another system).
+8. `sudo journalctl -u nginx` -> Check the logs.
+9. `sudo tail -f /var/log/nginx/error.log` -> Follow logs of nginx.
+
+### Troublshooting workflow
+
+```bash
+IP problem?
+     ↓
+Routing problem?
+     ↓
+Port problem?
+     ↓
+Firewall problem?
+     ↓
+Nginx problem?
+     ↓
+HTTP/Application problem?
+```
+
