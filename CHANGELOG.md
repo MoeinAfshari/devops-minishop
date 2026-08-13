@@ -250,7 +250,7 @@
 
 ## Day 15
 
-## Added
+### Added
 
 - Learned Network Interfaces & Gateways
 - Learned Route, Routing Table
@@ -259,7 +259,25 @@
 - Created docs/Networking/linux-networking.md
 - New Issue
 
-## Improved
+### Improved
 
 - Updated LEARNING.md
 - Updated CHANGELOG.md
+
+---
+
+## Day 16
+
+### Added
+
+-  Learned TCP/UDP & Port Troubleshooting
+- Learned when a server doesn't connect to service X, recognize the problem is from firewall, protocol, port, network, or the service?
+- New Issue
+
+### Improved
+
+- Updated LEARNING.md
+- Updated CHANGELOG.md
+
+
+
