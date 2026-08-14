@@ -279,5 +279,30 @@
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+---
+
+## Day 17
+
+### Added
+
+- Learned Docker & its usage
+- Learned Docker Image & Container
+- Learned create, run, stop & remove container
+- Learned checking status & information of container
+- Learned the difference between Container & Virtual Machine
+- Created docs/docker
+- Created docker/README.md
+- Created docker/notes
+- New Issue
+
+### Improved
+
+- Renamed docs/networking
+- Renamed docs/bash
+- Renamed docs/linux
+- Updated LEARNING.md
+- Updated CHANGELOG.md
+
+
 
 
