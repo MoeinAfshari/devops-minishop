@@ -690,3 +690,91 @@ Nginx problem?
 HTTP/Application problem?
 ```
 
+---
+
+# Day 17
+
+## What I learned
+
+- Docker Fundamentals.
+- Explain what is docker & why use it?
+- Explain docker architecture.
+- Know docker client & docker daemon.
+- Recognize Image & Container.
+- Create, Run, Stop & Remove a container.
+- Check status & information of container.
+- Understand the relationship between docker concepts and Linux
+
+## Challenges
+
+1. What is docker and why do we use it? Docker is a containerization platform used to package applications and their dependencies into portable containers, providing consistency across different environments.
+2. What's the difference between a Docker Image and a Container? Docker Image is a read only template that is used for creating containers, containing the application code and dependencies. A Docker Container is a lightweight, runnable instance of Docker Image.
+```bash
+Docker Image
+     │
+     │ docker run
+     ▼
+Container
+```
+3. What's the difference between a Container and a Virtual Machine? A Container shares the host kernel, while a VM runs its own guest OS kernel. Containers generally require fewer resources and start faster than VMs because they share the host kernel.
+4. What is the Docker Deamon? The Docker Deamon actually is the server side of a Docker platform that manages Images, Containers, Networks and Volumes.
+```bash
+Docker CLI
+    │
+    │ Docker API
+    ▼
+Docker Daemon
+    │
+    ├── Containers
+    ├── Images
+    ├── Networks
+    └── Volumes
+```
+5. Why does this Container stop immediately `docker run ubuntu`? `docker run ubuntu` starts the container's default command, which is Bash. Since there is no interactive terminal attached, Bash exits, and because the main process exits, the container stops.
+```bash
+bash exits
+   ↓
+PID 1 exits
+   ↓
+Container stops
+```
+6. What's the difference between `docker ps` and `docker ps -a`? `docker ps` shows running containers while `docker ps -a` shows all containers, even created containers and stoped containers.
+7. What's the difference between `docker stop` and `docker rm`? `docker stop` stop a container while `docker rm` remove a container.
+
+**Note**
+- Image: Read-only template
+- Container: Runnable instance of an Image
+- Process: The Container lives as long as its main process lives.
+
+```bash
+Image
+  │
+  │ docker run
+  ▼
+Container
+  │
+  ▼
+Main Process
+  │
+  ├── running → Container Running
+  │
+  └── exits   → Container Stopped
+```
+
+## Notes
+
+- Don't troubleshoot the Docker daemon first when the Docker daemon is already clearly working.
+- Team says:
+> The Docker container is running, but the application inside it is not working.
+
+What do you do?
+
+Answer:
+1. `docker ps` -> Container status -> Container is running or not.
+2. `docker ps -a` -> The container exists? Running? Exited? Created? What's its status?
+3. `docker logs <container>` -> Check logs of cotainer.
+4. `docker top <container>` -> Check processes inside container.
+5. `docker inspect <container>` -> Check configuration.
+6. `systemctl status docker` -> Check the problem is Docker Engine or not.
+7. `journalctl -u docker -n 100 --no-pager` -> Check logs of docker itself.
+
