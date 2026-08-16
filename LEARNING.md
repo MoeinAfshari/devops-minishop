@@ -778,3 +778,114 @@ Answer:
 6. `systemctl status docker` -> Check the problem is Docker Engine or not.
 7. `journalctl -u docker -n 100 --no-pager` -> Check logs of docker itself.
 
+---
+
+# Day 18
+
+## What I learned
+
+- Read a Dockerfile
+- Know CMD, RUN, COPY, WORKDIR, FROM & EXPOSE
+- Create a personal Docker Image
+- Run a Container of my Image
+- Know the difference between CMD & RUN
+- Inspect & Test Dokcer Image
+- Create the first Dockerfile for MiniShop
+
+
+## Challenges
+
+1. What is a Dockerfile? A Dockerfile is a text file that contains a set of instructions used to build a Docker image.
+2. What is the porpuse of `FROM`? `FROM` specifies the base iamge for the new image in a Dockerfile.
+3. What's the difference between `RUN` and `CMD`? `RUN` executes a command when building the image while CMD runs a command when a container is creating.
+```Bash
+RUN → build time
+CMD → container runtime
+```
+4. What's the porpuse of `WORKDIR`? `WORKDIR` sets the working directory for subsequent Dockerfile instructions and for the container`s runtime process.
+5. What's the difference between `COPY` and `RUN`? `COPY` copies files from the build context into the image, while `RUN` executes commands during image building.
+6. What does `EXPOSE 3000` means? It says to Docker, this container is expected to listen on port 3000.
+```Bash
+EXPOSE
+   ↓
+Documentation / metadata
+
+-p 3000:3000
+   ↓
+Publish / Port Mapping
+```
+7. What's the difference between `docker build` and `docker run`? docker build converts a Dockerfile to an image while docker run runs an image and creates a container of the image.
+```Bash
+docker build
+    ↓
+Dockerfile
+    ↓
+Image
+```
+```Bash
+docker run
+    ↓
+Image
+    ↓
+Container
+    ↓
+Main Process
+```
+8. What does `docker run -p 8080:80 nginx`? It creates & runs a container from nginx image and connects port 8080 of host system to port 80 of container.
+9. Why is this usually better
+```Dockerfile
+COPY package*.json ./
+RUN npm install
+COPY . .
+```
+than:
+```dockerfile
+COPY . .
+RUN npm install
+```
+? `npm dependencies` are in the package*.json, so after the first running image, until package*.json doesn't change, docker uses its cache to RUN npm install , if even other build context changed, but in the second architucture, if every file changed in the build context, docker ignores cache and check the files again to copy and runs `RUN npm install` again. It's slower.
+10. If a container starts and immediately exits, what would you check first? `docker ps` -> `docker ps -a` -> `docker logs container_name` -> `docker inspect container_name`.
+
+## Notes
+
+```Bash
+RUN  → BUILD TIME
+CMD  → CONTAINER RUNTIME
+
+EXPOSE → DOCUMENTATION
+-p     → PORT PUBLISHING
+
+IMAGE  → TEMPLATE
+CONTAINER → RUNNING INSTANCE
+```
+
+### Production Scenario
+
+Team says:
+> We built the MiniShop backend image, but the container exits immediately.
+
+Troubleshooting:
+
+1. `docker ps` -> I check that my contaienr is running or not.
+2. `docker ps -a` -> I check my container created or not.
+3. `docker logs minishop-backend` -> If container is created, I check the logs of it.
+4. `docker inspect minishop-backend` -> If I don't find out to solve, I check inspect data, specially Config, State, NetworkSettings & Mounts parts.
+5. `cat Dockerfile` -> `vim Dockerfile` -> I check Dockerfile again.
+
+Production Question:
+Assume `docker ps -a` shows:
+```Bash
+minishop-backend   Exited (1)
+```
+And `docker logs minishop-backend` shows:
+```Bash
+npm ERR! Missing script: "start"
+```
+Where is the problem?
+Is Docker daemon or Container or Application / package.json?
+
+The log: `npm ERR! Missing script: "start"` -> The problem returns to npm start , so the main problem probably is from package.json. the scripts & start part has a problem, so I check the package.json file, fix the problem, build & run again.
+
+---
+
+
