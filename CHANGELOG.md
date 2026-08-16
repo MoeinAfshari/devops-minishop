@@ -303,6 +303,23 @@
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+---
 
+## Day 18
 
+### Added
+
+- Learned Dockerfile
+- Created a personal Docker Image
+- Created the first Dockerfile for MiniShop
+- Created some files & directories in /backend
+- Created docs/docker/docker-build.md
+- Created docs/docker/docker-port-mapping.md
+- Created docs/docker/dockerfile.md
+
+### Improved
+
+- Documneted docker/README.md
+- Updated LEARNING.md
+- Updated CHANGELOG.md
 
