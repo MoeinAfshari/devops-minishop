@@ -888,4 +888,70 @@ The log: `npm ERR! Missing script: "start"` -> The problem returns to npm start 
 
 ---
 
+# Day 19
+
+## What I learned
+
+- Explain the Docker network concepts.
+- Know Default `bridge` network.
+- Make Custom Brdige Network.
+- Connect containers to a Network.
+- Know the difference between `none` & `bridge`.
+- How the containers find together with their IPs & Names.
+- Don't confuse Port Mapping with Docker Network.
+- Create a simple connection between two containers and test it.
+- Troubleshoot the problem "Container A doesn't connect to Container B".
+
+## Challenges
+
+1. What is Docker networking? Docker networking enables containers to communicate with each other and with external networks using virtual interfaces, IP addresses, and DNS-based name resolution.
+2. What's the difference between the default `bridge` network and a custom bridge network? A default bridge network is the default network of newly containers but custom bridge is created with `docker network create` and the containers add to that. containers just communicate with using IP addresses in default bridge while they can communicate with name-based automatically in the custom bridge network. User-defined/custom bridge has internal Docker DNS. custom bridge network is more secure too.
+3. What's the difference between bridge, host, and none networks? bridge is Docker default network for containers and It creates communication with using IP addresses between containers. host network uses from host network stack, easier access but less isolation; Doesn't have a separate network namespace and uses Host networking directly. none almost has no network access.
+4. How can two containers communicate with each other? They can communicate with using IP address or somewhere with name-based method like custom bridge.
+5. Why can containers on the same custom network communicate without `-p`? Because they don't need to connect to outside of Docker for create communication in a same custom network. by the way they can connect to each other with container name (name-based) in a same custom netowork. `-p` is for publishing container port to Host/External Network.
+6. What does `-p 8080:80` mean? It means connect port 8080 of host computer to port 80 of the container.
+7. What's the difference between `backend:3000` and `localhost:3000`? The first means the backend container on port 3000 in a same custom network while the second means localhost (main system) on port 3000.
+8. How can you find a container's IP address? I can find NetworkSettings in `docker inspect container_name` | `docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name`. 
+9. How can you inspect a Docker network? With `docker network inspect container_name`.
+10. Why is hard-coding a container IP usually a bad idea? Because I can create a communication with container names very simply while IPs may change and I need to configure again. Container may recreates and got a new IP.
+
+## Notes
+
+### Scenario
+
+You have this in MiniShop:
+```Bash
+Frontend Container
+       │
+       ▼
+Backend Container
+       │
+       ▼
+PostgreSQL Container
+```
+Every three containers shoud be on the `minishop-net` network.
+
+But Developer says:
+> Frontend cannot connect to Backend.
+
+Check step by step:
+1. `docker ps` -> Are two containers running?
+2. `docker network inspect minishop-net` -> Are two containers in the network?
+3. `docker exec -it frontend sh` -> `getent hosts backend` -> Is Backend resolivng?
+4. `nc -zv backend 3000` -> Is TCP Port 3000 accessible?
+5. `curl http://backend:3000` -> If it's HTTP, Check the application.
+
+### Mental Model
+
+```Bash
+Container Running?
+        ↓
+Same Network?
+        ↓
+DNS resolves?
+        ↓
+TCP Port reachable?
+        ↓
+Application responds?
+```
 
