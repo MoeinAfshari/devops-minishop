@@ -323,3 +323,24 @@
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+---
+
+## Day 19
+
+### Added
+
+- Learned Docker Network.
+- Learned Custom bridge & Default bridge.
+- Learned communication between containers.
+- Learned how to troubleshoot communication between containers.
+- Created docs/docker/bridge-network.md
+- Created docs/docker/container-communication.md
+- Created docs/docker/docker-networking.md
+- New Issue
+
+### Improved
+
+- Updated LEARNING.md
+- Updated CHANGELOG.md
+
+
