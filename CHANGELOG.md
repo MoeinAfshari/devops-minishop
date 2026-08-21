@@ -343,4 +343,23 @@
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+---
+
+## Day 20
+
+### Added
+
+- Learned Persistence concept.
+- Learned Docker Volumes.
+- Learned the difference between Volume & Bind Mount.
+- Created docs/docker/bind-mounts.md
+- Created docs/docker/database-persistence.md
+- Created docs/docker/docker-storage.md
+- Created docs/docker/docker-volumes.md
+- New Issue
+
+### Improved 
+
+- Updated CHANGELOG.md
+- Updated LEARNING.md
 
