@@ -955,3 +955,76 @@ TCP Port reachable?
 Application responds?
 ```
 
+---
+
+# Day 20
+
+## Targets of day
+
+- Explain the persistence concept.
+- Understand why data inside a container is temporary.
+- Know Docker Volume.
+- Create Named Volume & manage it.
+- Understand Bind Mount.
+- Know the difference between Volume & Bind Mount.
+- Keep PostgreSQL data with Volume.
+- Understand the difference between delete Container and Delete Volume.
+- Troubleshoot the problem of database data loss.
+
+
+## Challenges
+
+1. Why is data inside a normal container considered ephemeral? Data stored in the container's writable layer is tied to the container. It remains while the container exists, but it is lost when the contaienr is removed and recreated.
+2. What happens to data in the container writable layer when the container is removed? When the container is removed, data stored only in its writable layer is removed with it.
+3. What is a Docker Volume? A Docker Volume is persistent storage managed by Docker and independent of the lifecycle of a particular container.
+4. What's the difference between a Named Volume and a Bind Mount? A named volume managed by Docker and Docker specifies storage path while a bind mount managed by User/Host and the user specifies storage path.
+5. Why are volumes important for databases? Databases need persistent storage because their data must survive container replacement. Docker Volumes provide a convenient way to persist database data independently of the container lifecycle.
+6. What does this mean?
+```Bash
+-v postgres-data:/var/lib/postgresql/data
+```
+Mount the named Docker volume `postgres-data` at `/var/lib/postgresql/data` inside the container.
+```Bash
+-v postgres-data:/var/lib/postgresql/data
+        │                     │
+        │                     └── Container path
+        └── Docker Volume name
+```
+7. What happens if you remove the PostgreSQL container but keep its volume? I can recreate the container and use from the past volume address and remain all those data.
+8. How can you list Docker volumes? with `docker volume ls`.
+9. How can you inspect a Docker volume? with using `docker volume inspect volume_name` command.
+10. What would happen to the database data if you remove both the container and its volume? Data stored in the volume, so if I remove a volume, the database data removed too.
+
+## Notes
+
+### Scenario
+
+Team says:
+> We deleted the PostgreSQL container and all customer data disappeared.
+
+You shoud troubleshoot in the first:
+
+1. `docker ps -a` -> Does exist the container?
+2. `docker volume ls` -> Does exist the volume?
+3. `docker volume inspect postgres-data` -> Check the volume exists or not!?
+4. `docker inspect minishop-postgres` -> If the container exists, so:
+5. Check `postgres-data` is mounted to `/var/lib/postgresql/data` in `Mounts`.
+
+### Second Scenario
+
+Suppose:
+```Bash
+Container = deleted
+Volume = exists
+```
+Data isn't lost and you can run a new container with the same volume.
+
+### Third Scenario
+
+```Bash
+Container = deleted
+Volume = deleted
+```
+
+In this scenario, you can't recovery data from volume.
+
