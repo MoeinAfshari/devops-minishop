@@ -1028,3 +1028,89 @@ Volume = deleted
 
 In this scenario, you can't recovery data from volume.
 
+# Day 21
+
+## Targets of day
+
+- Explain Docker Compose.
+- Understand structure of `compose.yaml`.
+- Learn Service concept.
+- Manage some containers with a file.
+- Define Volume in the Compose.
+- Use Environment Variables.
+- Work with `docker compose up/down/ps/logs/exec`.
+- Run MiniShop Backend + PostgreSQL by Compose.
+- Understand tthe difference between `docker run` and `docker compose`.
+
+## Challenges
+
+1. What is Docker Compose and why do we use it? Docker Compose is a tool for defining and running multi-container applications. it improves consistency, reduces manual errors, and makes development and deployment workflows easier to reproduce.
+**Note:** Docker Compose usually is suitable for testing, local development and deployments.
+2. What's the difference between `docker run` and `docker compose up`? `Docker run` creates & runs a single container while `docker compose up` runs a compose.yml file that contains some services, volumes, networks & ... and it's for multi-container applications.
+```Bash
+docker run
+   ↓
+single container
+```
+```Bash
+docker compose up
+   ↓
+multiple services
+```
+3. What is a Service in Docker Compose? A Service is a declarative definition of a containerized application component in the Compose file, including its image or build configuration, ports, networks, volumes, environment, and other settings.
+4. Why can a backend container use `postgres:5432` instead of `localhost:5432`? It's true when we defined DB_HOST: postgres; it means my database is in postgres & the postgres is a service in the compose file.
+```Bash
+backend
+   ↓
+DNS
+   ↓
+postgres
+   ↓
+TCP 5432
+```
+5. What does `docker compose down` do? `docker compose down` stops and removes the Compose project's containers and networks. Named volumes are not removed by default.
+6. What's the purpose of the `volumes:` section in a Compose file? The `volumes` section defines named volumes, and service's `volume` section specifies how those volumes are mounted into the container.
+7. What does `depends_on` do? It shows an ordering. when a service is depends on another service, that another service will run in the first & than this service runs.
+```Bash
+depends_on
+    ↓
+Start/creation order
+```
+8. Does `dpeneds_on` guarantee that PostgreSQL is ready to accept connections? No, It only controls dependency order and does not guarantee that the dependency is ready to accept connections.
+9. What does this mean?
+```Bash
+ports:
+  - "3000:3000"
+```
+It means to connect port 3000 from host to the port 3000 of this service from compose file.
+10. Why should passwords usually not be hard-coded in `compose.yaml`? Because it's not secure. for this reason we create a `.env` file, store sensitive data in that and use from variables in `compose.yml`. we put `.env` file in the `.gitignore` file too.
+
+
+## Notes
+
+### Scenario
+
+Team says:
+> The MiniShop backend container is running, but it cannot connect to PostgreSQL.
+
+The information:
+```Bash
+Backend:
+3000
+
+PostgreSQL:
+5432
+
+Compose Network:
+default project network
+```
+
+1. `docker compose ps` -> Are they running? (backend & postgres)
+2. `docker compose logs postgres` -> Does PostgreSQL really show it?
+```Bash
+database system is ready to accept connections
+```
+3. `docker compose exec backend sh` -> `getent hosts postgres` -> Does DNS work?
+4. `nc -zv postgres 5432` -> Does TCP connection connect?
+5. `docker compose config` -> Check Environment -> Does it have `DB_HOST=postgres` & `DB_PORT=5432`?
+6. `docker compose logs backend` -> If you see `ECONNREFUSED` or `password authentication failed` or `getaddrinfo ENOTFOUND postgres`, find every error is for what layer.
