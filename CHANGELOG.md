@@ -363,3 +363,23 @@
 - Updated CHANGELOG.md
 - Updated LEARNING.md
 
+---
+
+## Day 21
+
+### Added
+
+- Learned Docker Compose.
+- Learned Structure of compose.yml file.
+- Learned Docker Compose commands.
+- Created compose.yaml.
+- Created .env.
+- Created docs/docker/docker-compose.md.
+- New Issue
+
+### Improved
+
+- Added `.env` inside the .gitignore.
+- Updated LEARNING.md
+- Updated CHANGELOG.md
+
