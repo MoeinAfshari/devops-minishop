@@ -383,3 +383,20 @@
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+---
+
+## Day 22
+
+### Added
+
+- Learned Docker Compose Healthcheck.
+- Learned Restart Policy.
+- New Issue
+
+### Improved
+
+- Updated LEARNING.md
+- Updated CHANGELOG.md
+- Updated compose.yaml
+- Updated docs/docker/docker-compose.md
+

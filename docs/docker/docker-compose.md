@@ -34,6 +34,57 @@ depends_on
 start order ✅
 ```
 
+## `depends_on` + Healthcheck
+
+Sometimes we need to run one service after another and test its health.
+So we can use `depends_on` in two ways:
+1. `depends_on`:
+```YAML
+depends_on:
+  - postgres
+```
+Workflow:
+```Bash
+PostgreSQL starts
+   ↓
+Backend starts
+```
+2. `depends_on` + Healthcheck:
+```YAML
+depends_on:
+  postgres:
+    condition: service_healthy
+```
+Workflow:
+```Bash
+PostgreSQL starts
+   ↓
+Healthcheck passes
+   ↓
+Backend starts
+```
+This way is useful when we need to start a health service, no just start a service.
+
+## Restart Policies
+
+A Docker Compose restart policy is a configuration setting for Docker to use in dtermining how to restart containers that have stopped or failed.
+
+### Types of Restart policies
+
+- no: It will not be automatically restarted if it stops. This is the default behavior unless a restart policy has been specified.
+- always: The container will be restarted always, no matter the exit status. This ensures maximum service availability and suits only the critical services that must not fail.
+- on-failure: This will restart the container only if it has exited with a non-zero exit code, hence encountering an error. This is useful for services that should be restarted only when they experience failure.
+- unless-stopped: This will restart the container unless it is explicitly stopped or Docker itself is stopped or restarted. This policy is the same as always but allows for manual intervention to stop the container without it automatically restarting.
+
+Example:
+```YAML
+ db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    restart: on-failure
+```
+
 ## Common Commands
 
 - `docker compose up`
