@@ -1114,3 +1114,98 @@ database system is ready to accept connections
 4. `nc -zv postgres 5432` -> Does TCP connection connect?
 5. `docker compose config` -> Check Environment -> Does it have `DB_HOST=postgres` & `DB_PORT=5432`?
 6. `docker compose logs backend` -> If you see `ECONNREFUSED` or `password authentication failed` or `getaddrinfo ENOTFOUND postgres`, find every error is for what layer.
+
+---
+
+# Day 22
+
+## Targets of day
+
+- Understand the difference between `build` & `image` in Compose.
+- Understand policy of `restart`.
+- Understand & use `healthcheck`.
+- Use `depnds_on` with healthcheck.
+- Manage Environments better.
+- Write a clean & maintainable Compose file.
+- Connect Backend & PostgreSQL logically.
+- Compose troubleshooting status of services.
+
+## Challenges
+
+1. What's the difference between `build` and `image` in Dokcer Compose? build makes an image according to a Dockerfile for a service like backend service while image just uses an image from registry like postgres:16.
+2. What does `restart: unless-stopped` do? `restart: unless-stopped` tells Docker to automatically restart the container if it stops, unless the container was explicitly stopped by the user.
+**Note:** Restart Policy is for failure recovery.
+```Bash
+Application crashes
+      ↓
+Container stops
+      ↓
+Docker restarts it
+      ↓
+Container runs again
+```
+3. What is Docker healthcheck? Docker healthcheck does some tests with some configurations according to that I want for ensure about health of a service.
+4. Why is a healthcheck useful with `depends_on`? Because It starts a service & checks healthy and if the service was health, another service will start. if `depends_on` has `condition: service_healthy`.
+```Bash
+PostgreSQL starts
+      ↓
+Healthcheck runs
+      ↓
+Healthy ✅
+      ↓
+Backend starts
+```
+5. What's the difference between:
+```YAML
+depends_on:
+  - postgres
+```
+and:
+```YAML
+depends_on:
+  postgres:
+    condition: service_healthy
+```
+? The difference is:
+```Bash
+depends_on:
+PostgreSQL starts -> Backend starts
+
+depends_on + Healthcheck:
+PostgreSQL starts -> Healthy passes -> Backend starts
+```
+6. What does `docker compose config` do? `docker compose config` parses and renders the Compose configuration and helps validate the resulting configuration, including interpolated variables.
+7. What's the difference between:
+```Bash
+docker compose build
+```
+and:
+```Bash
+docker compose up -d --build
+```
+? `docker compose build` just builds some images while `docker compose up -d --build` builds some images if was need and start serivces.
+8. What does `restart: on-failure` do? `restart: on-failure` restarts the container when its main process exits with a non-zero exit code.
+```Bash
+exit 0 → normally stopped
+exit 1 → failure → restart
+```
+9. How can you check the health status of a container? with using `docker compose ps` & `docker inspect --format='{{json .State.Health}}' container_name`.
+10. Why shouldn't we use `latest` tags for important production services? Pinning a specific version makes deployments more predictable and reproducible and reduces the risk of unexpected breaking changes after an image update.
+`image: postgres:16` is better than `image: postgres:latest`.
+
+## Notes
+
+### Scenario
+
+> MiniShop Backend keeps restarting. PostgreSQL is running.
+
+Answer:
+
+1. `docker compose ps`
+2. `docker compose logs backend`
+3. `docker inspect minishop-backend`
+4. `docker compose config`
+5. `docker compose ps postgres`
+6. `docker compose logs postgres` -> If PostgreSQL was unhealthy, Check:
+7. `docker inspect minishop-postgres` -> Check part 'State -> Health'.
+
