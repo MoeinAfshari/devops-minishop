@@ -400,3 +400,25 @@
 - Updated compose.yaml
 - Updated docs/docker/docker-compose.md
 
+---
+
+## Day 23
+
+### Added
+
+- Understood the difference between Database Backup and Container Backup.
+- Had a Backup/Restore workflow for Database.
+- Created /backups directory.
+- Created a backup from postgres in /backups.
+- Created docs/docker/database-backup.md
+- Created docs/docker/database-restore.md
+- Created docs/docker/docker-volume-backup.md
+- Created scripts/backup-postgres.sh
+- New Issue
+
+### Improved
+
+- Updated .gitignore
+- Updated LEARNING.md
+- Updated CHANGELOG.md
+
