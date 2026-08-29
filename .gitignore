@@ -1,1 +1,4 @@
 .env
+backups/*.sql
+backups/*.sql.gz
+backups/*.tar.gz
