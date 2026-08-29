@@ -1209,3 +1209,113 @@ Answer:
 6. `docker compose logs postgres` -> If PostgreSQL was unhealthy, Check:
 7. `docker inspect minishop-postgres` -> Check part 'State -> Health'.
 
+---
+
+# Day 23
+
+## Targets of day
+
+- Manage Database Container correctly.
+- Understand the difference between Database Backup and Container Backup.
+- Get Backup from Docker PostgreSQL.
+- Restore Backup.
+- Know when don't remove Volume.
+- Manage PostgreSQL by Docker Compose.
+- Test Persistence in a real scenario.
+- Have a Backup/Restore workflow for Database.
+- Troubleshoot the production scenario related to the database crash.
+
+## Challenges
+
+1. What is the difference between ephemeral container storage and persistent volume storage? Ephemeral storage is writable layer on a container and if the container remove or recreate, the storage gone while a persistent volume has a lifecycle independent of the container.
+2. What is `pg_dump`? `pg_dump` is a PostgreSQL command-line utility that creates a logical backup of a database, including its schema and data.
+3. What is a logical database backup? A logical database backup contains a logical representation of database's schema and data, which can be restored to reconstruct the database.
+4. What's the difference between `pg_dump` and backing up a Docker Volume? `pg_dump` is a logical database backup while Volume backup is a filesystem-level backup.
+5. Why shouldn't we blindly copy PostgreSQL data files while the database is running? A live filesystem copy can capture an inconsistent state while PostgreSQL is modifying data, so the resulting backup may not be safely restorable.
+6. How can you back up a PostgreSQL database running in Docker Compose?
+```Bash
+docker compose exec -T postgres \
+pg_dump -U postgres -d minishop \
+> minishop-backup.sql
+```
+7. How can you restore a SQL backup into PostgreSQL?
+```Bash
+docker exec -i minishop-postgres \
+psql -U postgres -d restore_test \
+< minishop-backup.sql
+```
+OR
+```Bash
+cat minishop-backup.sql | \
+docker compose exec -T postgres \
+psql -U postgres -d restore_test
+```
+8. What happens to the database data when the PostgreSQL container is remmoved but the volume remains? We can create a new container and use the same volume to add the data in the new contaier.
+```Bash
+Container A
+     ↓
+deleted ❌
+
+Volume
+     ↓
+still exists ✅
+
+Container B
+     ↓
+same volume
+     ↓
+Data remains ✅
+```
+9. What happens if both the PostgreSQL cotainer and its volume are removed? If both the cotainer and volume are deleted but a valid backup exists, we can create a new PostgreSQL cotainer and restore the database from the backup.
+10. Why should we test database restores instead of only creating backups? Because we may loose data and need to restore the backups, so we need to ensure restoring backups work correctly.
+
+## Notes
+
+### Scenario
+
+In the morning the team realizes:
+> The PostgreSQL container was accidentally deleted.
+
+Answer:
+
+- `docker compose ps -a`
+- `docker volume ls`
+
+#### The first Scenario
+
+```Bash
+Container → Deleted
+Volume → Exists
+```
+
+Can run a container with the same volume again.
+
+#### The second scenario
+
+```Bash
+Container → Deleted
+Volume → Deleted
+Backup → Exists
+```
+Now:
+```Bash
+Backup
+  ↓
+New PostgreSQL
+  ↓
+Restore
+  ↓
+Data Recovered
+```
+
+#### The third scenario
+
+```Bash
+Container → Deleted
+Volume → Deleted
+Backup → Exists
+Backup → Corrupted
+```
+
+> Backup is not enough; Backup should be restorable too.
+
