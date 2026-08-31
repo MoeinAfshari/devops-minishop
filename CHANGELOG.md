@@ -422,3 +422,19 @@
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+---
+
+## Day 24
+
+### Added
+
+- Dived into Docker networking & troubleshooting
+- Created docs/docker/docker-dns.md
+- Created docs/docker/docker-network-troubleshooting.md
+- New Issue
+
+### Improved
+
+- Updated LEARNING.md
+- Updated CHANGELOG.md
+
