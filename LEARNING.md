@@ -1319,3 +1319,70 @@ Backup → Corrupted
 
 > Backup is not enough; Backup should be restorable too.
 
+---
+
+# Day 24
+
+## Targets of day
+
+- Dive into Docker networing & troubleshooting
+
+## Challenges
+
+1. What is a Docker network namespace? A network namespace isolates a container's network stack, including its interfaces, IP addresses, routing table, and network connections.
+2. How does a container get an IP address on a Docker bridge network? Docker gives to every container an IP address on every network when the container is connecting to that network. User-defined bridge has DNS resolution too so containers can connect together with their names.
+3. What does `ip addr` show inside a container? It shows container interfaces. Interface name, IP addresses, MAC, State, IPv4/IPv6.
+4. What does `ip route` show inside a container? It shows container routing table.
+5. How does Docker provide DNS-based service discovery? Docker usually provides DNS-based service discovery on the user-defined bridge network and every container knows each other with its name in the same network.
+6. Why is `backend:3000` preferred over a hard-coded container IP? Because it's more human-readable and the container IP may changes after removing, recreating and restarting.
+7. What's the difference between `localhost:3000` and backend:3000` inside a container? `localhost:3000` mentions to inside the container on port 3000 while `backend:3000` mentions to backend container on port 3000 in the same network.
+8. How can you test DNS resolution between two containers?
+```Bash
+localhost:3000 mentions to inside the container on port 3000 while backend:3000 mentions to backend container on port 3000 in the same network.
+```
+9. How can you test TCP connectivity between two containers?
+```Bash
+nc -zv server_name port
+```
+10. How would you troubleshoot a container that can resolve another container but cannot connect to its port? Production-oriented:
+```Bash
+1. docker ps
+       ↓
+2. docker network inspect minishop-net
+       ↓
+3. getent hosts backend
+       ↓
+4. nc -zv backend 3000
+       ↓
+5. curl http://backend:3000
+       ↓
+6. docker logs backend
+```
+
+## Notes
+
+### Scenario:
+
+> MiniShop backend is running, PostgreSQL is running, but Backend cannot connect to PostgreSQL.
+
+Troubleshooting Order:
+```Bash
+1. Is PostgreSQL running?
+2. Are both services on the same network?
+3. Does postgres resolve?
+4. Is port 5432 reachable?
+5. Is PostgreSQL accepting connections?
+6. Are DB credentials correct?
+7. Is the Backend application configured correctly?
+```
+
+Commands:
+
+1. `docker compose ps`
+2. `docker network inspect <network>`
+3. `docker compose exec backend sh`
+4. `getent hosts postgres`
+5. `nc -zv postgres 5432`
+6. `docker compose logs postgres`
+7. `docker compose logs backend`
+
