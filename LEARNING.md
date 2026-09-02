@@ -1338,7 +1338,8 @@ Backup → Corrupted
 7. What's the difference between `localhost:3000` and backend:3000` inside a container? `localhost:3000` mentions to inside the container on port 3000 while `backend:3000` mentions to backend container on port 3000 in the same network.
 8. How can you test DNS resolution between two containers?
 ```Bash
-localhost:3000 mentions to inside the container on port 3000 while backend:3000 mentions to backend container on port 3000 in the same network.
+docker exec -it first_contaier sh
+getent hosts second_container
 ```
 9. How can you test TCP connectivity between two containers?
 ```Bash
@@ -1383,6 +1384,153 @@ Commands:
 3. `docker compose exec backend sh`
 4. `getent hosts postgres`
 5. `nc -zv postgres 5432`
-6. `docker compose logs postgres`
-7. `docker compose logs backend`
+6. `wget -qO- http://postgres`
+7. `docker compose logs postgres`
+8. `docker compose logs backend`
+
+---
+
+# Day 25
+
+## Targets of day
+
+- What's Registry?
+- What's Repository?
+- What's Image Tag?
+- Know the difference between `name:tag`.
+- Know Docker Hub.
+- Tag Image.
+- Push Image.
+- Pull Image.
+- Run Image on another Docker Host.
+- Know the difference between Registry Image and Local Image.
+- Troubleshoot `Unauthorized`, `pull denied` and `tag does not exist` problems.
+
+## Challenges
+
+1. What is a docker registry? A docker registry is where stores images, manage them and share them publicly or privatly.
+2. What's the difference between a Registry and Repository? A registry is a docker images storage while a repository is a space for an image in the registry.
+3. What is an image tag? A human-readable refrence used to identify a particular version or variant of an image.
+4. What does this mean?
+```Bash
+moein/minishop-backend:1.0
+```
+It's an image.`moein` is namespace/user, `minishop-backend` is image name /  repository and `1.0` is tag/version.
+5. What's the difference between `docker build` and `docker push`? `docker build` converts a Dockerfile to an image while `docker push` pushs an image to a docker registry like docker hub.
+6. What does `docker pull` do? `docker pull` downloads an image from registry on your host.
+7. Why do we tag images before pushing them? Tags allow us to identify different versions or variants of the same repository.
+8. What's wrong with relying on `latest` in production? `latest` doesn't mention to an unique tag/version of image and it can makes some errors.
+9. What causes `denied: requested access to the resource is denied`? Possible causes include authentication failure, insufficient permissions, incorrect repository name, or attempting to push to a repository that does not exist or is not owned by the user.
+So check:
+```Bash
+Login
+   ↓
+Repository
+   ↓
+Permission
+   ↓
+Tag
+```
+10. How can you deploy the same Docker image to another server? Build once, push once, pull and run anywhere.
+```Bash
+Developer Host
+      ↓
+docker build
+      ↓
+docker tag
+      ↓
+docker push
+      ↓
+Registry
+      ↓
+Production Server
+      ↓
+docker pull
+      ↓
+docker run
+```
+
+## Notes
+
+### Scenario:
+
+Developer says:
+> "I built the MiniShop backend image on my laptop, but the production server doesn't have it."
+
+```Bash
+Developer Laptop
+      ↓
+docker build
+      ↓
+Image
+      ↓
+docker tag
+      ↓
+Registry
+      ↓
+docker push
+      ↓
+Production Server
+      ↓
+docker pull
+      ↓
+docker run
+```
+
+#### In my Laptop
+
+1. `docker build -t minishop-backend:1.0 .` -> Build image.
+2. `docker images` -> Check it.
+3. `docker tag DOCKERHUB_USERNAME/minishop-backend:1.0` -> Create tag.
+4. `docker rmi minishop-backend:1.0` -> Remove last image.
+5. `docker push DOCKERHUB_USERNAME/minishop-backend:1.0` -> Push in registry.
+
+#### In the Production
+
+1. `docker pull DOCKERHUB_USERNAME/minishop-backend:1.0`.
+2. `docker run -d --name minishop-backend --network minishop-net -p 3000:3000 DOCKERHUB_USERNAME/minishop-backend:1.0`
+
+### Second Scenario
+
+On the production, `docker pull username/minishop-backend:1.0` gives `pull access denied`.
+What do you check?
+
+1. `docker login` & `docker info` -> Check login info, specially Username.
+2. `docker pull username/minishop-backend:1.0` -> Check namespace, repository name and tag.
+3. Check to login before pull if it's a private repository:
+```Bash
+docker login registry_web_address
+docker pull registry_web_address/username/minishop-backend:1.0
+```
+4. Check your permissions.
+5. Check which registry Docker is actually contacting.
+
+Quick diagnostic checklist:
+```Bash
+IMAGE="registry.example.com/username/minishop-backend:1.0"
+
+# 1. Can I authenticate?
+docker login registry.example.com
+
+# 2. Try pulling the exact image/tag
+docker pull "$IMAGE"
+
+# 3. Check Docker's current configuration
+docker info
+
+# 4. Check where credentials are configured
+cat ~/.docker/config.json
+```
+
+### Third Scenario
+
+Developer says:
+> "I pushed version 1.1, but production is still running the old version."
+
+1. `docker images` -> Check current images in production.
+2. `docker ps` -> What containers are running?
+3. `docker inspect current_container_name` -> Check status of the current container.
+4. `docker pull username/minishop-backend:1.1` -> Pull new version of image.
+5. `docker stop minishop-backend:1.0` & `docker rm minishop-backend:1.0` -> Stop & remove the last container.
+6. `docker run -d --name minishop-backend:1.1 --network minishop-net username/minishop-backend:1.1` -> Recreate a container with the new version of the image, if was necassary can add last volume to this container too.
 

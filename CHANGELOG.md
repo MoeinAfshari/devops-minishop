@@ -438,3 +438,24 @@
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+---
+
+## Day 25
+
+### Added
+
+- Learned what are registry, repository and image tag.
+- Learned Docker Hub.
+- Learned tag, push & pull images.
+- Troubleshooted `unauthorized`, `pull denied` and `tag does not exist` problems.
+- Created docs/docker/docker-registry.md
+- Created docs/docker/docker-push-pull.md
+- Created docs/docker/docker-image-tagging.md
+- New Issue
+
+### Improved
+
+- Updated LEARNING.md
+- Updated CHANGELOG.md
+
+
