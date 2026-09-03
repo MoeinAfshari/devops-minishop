@@ -2,3 +2,5 @@
 backups/*.sql
 backups/*.sql.gz
 backups/*.tar.gz
+backend/node_modules
+backend/package-lock.json

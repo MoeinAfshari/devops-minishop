@@ -1534,3 +1534,29 @@ Developer says:
 5. `docker stop minishop-backend:1.0` & `docker rm minishop-backend:1.0` -> Stop & remove the last container.
 6. `docker run -d --name minishop-backend:1.1 --network minishop-net username/minishop-backend:1.1` -> Recreate a container with the new version of the image, if was necassary can add last volume to this container too.
 
+---
+
+# Day 26
+
+## What I learned
+
+- Docker image layers
+- Docker build cache
+- .dockerignore
+- npm ci
+- Production dependencies
+- Image size optimization
+- Non-root containers
+- Least privilege
+- Base image selection
+- docker history
+
+## Notes
+
+### Practical Work
+
+- Optimized MiniShop backend Dockerfile
+- Added .dockerignore
+- Tested Docker layer caching
+- Tested non-root container execution
+- Compared image sizes
