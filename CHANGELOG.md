@@ -458,4 +458,27 @@
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+---
+
+## Day 26
+
+### Added
+
+- Learned Dockerfile Optimizing
+- Learned Dockerfile Best Practices
+- Created backend/.dockerignore
+- Tested Docker layer caching
+- Tested non-root contaienr execution
+- Copmared image sizes
+
+### Improved
+
+- Optimized MiniShop backend Dockerfile
+- Updated backend/Dockerfile
+- Updated backend/package-lock.json
+- Updated LEARNING.md
+- Updated CHANGELOG.md
+
+
+
 
