@@ -479,6 +479,20 @@
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+--- 
+
+## Day 27
+
+### Added
+
+- Learned what is Nginx.
+- Learned Nginx tests and Nginx logs.
+- Learned Server Blocks, Web Server and Reverse Proxy.
+
+### Improved
+
+- Update LEARNING.md
+- Update CHANGELOG.md
 
 
 
