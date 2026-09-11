@@ -1697,6 +1697,131 @@ docker logs <backend-container>
 - Tested Nginx reload
 - Checked access and error logs
 
+---
+
+# Day 28 - Nginx Reverse Proxy
+
+## What I learned
+
+- Nginx reverse proxy.
+- proxy_pass.
+- upstream servers.
+- proxy headers.
+- Host header.
+- X-Real-IP.
+- X-Forwarded-For.
+- X-Forwarded-Proto.
+- 502 Bad Gateway.
+- Nginx and Docker networking.
+
+## Challenges
+
+### Challenge 1
+
+Explain this config:
+```Nginx
+server {
+    listen 80;
+    server_name minishop.local;
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:3000;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+```
+Explain each directive.
+
+- `server { }` is a server block that is a section of Nginx configuration.
+- `listen 80;` tells Nginx to accept HTTP connections on port 80.
+- `server_name minishop.local;` defines hostname. this server block is for `minishop.local` hostname.
+- `location /api/ { ...}` defines how Nginx handles requests matching `/api/`.
+- `proxy_pass http://127.0.0.1:3000;` forwards requests on this api to `127.0.0.1:3000` address.
+- `proxy_set_header Host $host;` preserves the original Host header from the client request and sends it to the backend.
+- `proxy_set_header X-Real-IP $remote_addr;` passes client IP to backend.
+
+### Challenge 2
+
+Answer to this question:
+> What is the purpose of `proxy_pass`?
+> `proxy_pass` forwards incoming client requests from Nginx to an upstream backend server.
+
+### Challenge 3
+
+Explain the difference between two architecture:
+A:
+```Bash
+Nginx on Host
+   ↓
+Backend in Docker
+```
+B:
+```Bash
+Nginx in Docker
+   ↓
+Backend in Docker
+```
+And say everyone uses what address for `proxy_pass`.
+
+In the A, Docker container should published on the host and Nginx on the host usually forwards requests to that port like `pass_proxy http://127.0.0.1:3000;`. In the B, proxy can pass to backend directly if they be in the same network and doesn't need to published port for local connections, its proxy_pass is like `proxy_pass http://backend:3000`.
+
+### Challenge 4
+
+Assume:
+```Bash
+curl http://localhost:3000
+```
+works but:
+```Bash
+curl http://minishop.local
+```
+returns `502 Bad Gateway`.
+
+What do you do? write 5 items.
+
+1. `sudo tail -f /var/log/nginx/error.log` -> Check error reason.
+2. `docker ps` -> Check status of backend container.
+3. `docker start backend_contaienr` -> If it was stopped.
+4. `vim /etc/nginx/sites-available/minishop` -> Check Nginx configurations & server block of it. Check `server_name` specially.
+5. `sudo nginx -t` -> `sudo systemctl reload nginx` -> If have any change.
+6. `systemctl status nginx` -> Check status of Nginx.
+7. `curl http://localhost:3000` and `curl http://minishop.local`.
+
+We wanna understand where is the problem? `Nginx -> Backend` or `Client -> Nginx`.
+
+### Challenge 5
+
+This configuration has problem intentionally:
+```Nginx
+server {
+    listen 80;
+
+    server_name minishop.local
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+    }
+}
+```
+What's the problem and how do you find it?
+
+The problem is semi-colon; end of `server_name minishop.local` needs a `;` but it doesn't have. I use from `nginx -t` to find Nginx configuration problems.
+
+## Notes
+
+### Practical Work
+
+- Configured Nginx as a reverse proxy.
+- Connected Nginx to MiniShop backend.
+- Added proxy headers.
+- Tested backend through Nginx.
+- Tested 502 troubleshooting.
+- Checked Nginx access and error logs.
+
+---
+
 # Day 29
 
 ## What I learned

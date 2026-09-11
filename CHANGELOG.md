@@ -515,6 +515,17 @@
 ---
 
 ## Day 29
+- Learned Reverse Proxy and `proxy_pass`.
+- Learned proxy headers.
+- Troubleshooted 502 Bad Gateway.
+- Added proxy headers.
+
+### Improved
+
+- Configured Nginx as a reverse proxy.
+- Connected Nginx to MiniShop backend.
+- Updated LEARNING.md
+- Updated CHANGELOG.md
 
 ### Added
 
