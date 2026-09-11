@@ -500,6 +500,21 @@
 
 ### Added
 
+- Learned Reverse Proxy and proxy_pass.
+- Learned proxy headers.
+- Troubleshooted 502 Bad Gateway.
+- Added proxy headers.
+
+### Improved
+
+- Configured Nginx as a reverse proxy.
+- Connected Nginx to MiniShop backend.
+- Updated LEARNING.md.
+- Updated CHANGELOG.md.
+
+---
+
+## Day 29
 - Learned Reverse Proxy and `proxy_pass`.
 - Learned proxy headers.
 - Troubleshooted 502 Bad Gateway.
@@ -512,3 +527,15 @@
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+### Added
+
+- Learned how a real production Dockerized application is structured.
+- Created nginx/Dockerfile
+- Created nginx/nginx.conf
+
+### Improved
+
+- Updated backend/Dockerfile
+- Updated compose.yaml
+- Updated LEARNING.md
+- Updated CHANGELOG.md

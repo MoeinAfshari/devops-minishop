@@ -1820,3 +1820,137 @@ The problem is semi-colon; end of `server_name minishop.local` needs a `;` but i
 - Tested 502 troubleshooting.
 - Checked Nginx access and error logs.
 
+---
+
+# Day 29
+
+## What I learned
+
+- How a real production Dockerized application is structured.
+
+## Production Challenges
+
+### Challenge 1
+
+Explain this architecture:
+```
+Client
+
+ |
+
+Nginx Container
+
+ |
+
+Backend Container
+
+ |
+
+PostgreSQL Container
+
+ |
+
+Docker Volume
+```
+Nginx receives client requests and forwards them to the appropriate backend service. PostgreSQL is the database service that stores and manages application data. We have a persistent storage as Docker volume.
+
+### Challenge 2
+
+Why is it mistake?
+```Nginx
+proxy_pass http://localhost:3000;
+```
+Inside Nginx container.
+
+Because it mentions to itself Nginx container on port 3000. We should use stuff like backend:3000 for connect to backend with internal DNS resolver.
+
+### Challenge 3
+
+Backend is running:
+```Bash
+docker ps
+```
+But:
+```
+502 Bad Gateway
+```
+Write troubleshooting steps.
+1. `docker compose ps`
+2. `docker compose logs nginx`
+3. `docker compose logs backend`
+4. `docker compose logs postgres`
+5. `docker network inspect minishop-network`
+6. `docker compose exec nginx sh`
+7. `curl http://backend:3000` -> If the curl was success:
+```
+Nginx → Backend ✅
+```
+8. `nginx -t` -> Check configuration.
+9. `nginx -s reload` -> Inside Nginx container | `docker compose restart nginx` -> If change config, according to setup.
+
+In the Compose environment, it is better if you mount/copy the config from the file, usually recreate/restart the container or perform the reload inside the same container.
+
+### Challenge 4
+
+The difference between:
+```YAML
+ports:
+  
+  - "3000:3000"
+```
+And:
+```YAML
+expose:
+  - "3000"
+```
+
+In the first container port is published on the host port (3000 to 3000) while in the second port 3000 on the container is listening but it doesn't publish on the host.
+
+### An important point
+
+In the architecture:
+```Nginx
+proxy_pass http://backend:3000;
+```
+It doesn't need to have this:
+```YAML
+ports:
+  - "3000:3000"
+```
+This Production point is important.
+Backend doesn't need to publish on the Host directly, when Nginx just should have access to that.
+
+### Remember
+
+Separate these scenarios:
+
+#### Nginx A on a host
+
+```
+Host
+├── Nginx
+│    ↓
+└── Backend Container
+```
+Here if backend is published on the host port 3000, may you have:
+```Nginx
+proxy_pass http://127.0.0.1:3000;
+```
+
+#### Nginx B inside the container
+
+```
+Docker
+├── Nginx Container
+│       ↓
+└── Backend Container
+```
+Here:
+```Nginx
+proxy_pass http://backend:3000;
+```
+And not:
+```Nginx
+proxy_pass http://localhost:3000;
+```
+
