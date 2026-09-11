@@ -1,11 +1,28 @@
 services:
   
+  nginx:
+    build:
+      context: ./nginx
+
+    container_name: 
+      minishop-nginx
+
+    ports:
+      - "80:80"
+
+    depends_on:
+      - backend
+
   backend:
     build:
       context: ./backend
-    container_name: minishop-backend
+
+    container_name: 
+      minishop-backend
+
     ports:
       - "3000:3000"
+
     environment:
       NODE_ENV: development
       DB_HOST: postgres
@@ -13,20 +30,31 @@ services:
       DB_NAME: ${POSTGRES_DB}
       DB_USER: ${POSTGRES_USER}
       DB_PASSWORD: ${POSTGRES_PASSWORD}
+
     depends_on:
       postgres:
         condition: service_healthy
+
     restart: unless-stopped
 
   postgres:
-    image: postgres:16
-    container_name: minishop-postgres
+    image: 
+      postgres:16
+
+    container_name: 
+      minishop-postgres
+
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    env_file:
+      - .env
+
     volumes:
       - postgres-data:/var/lib/postgresql/data
+
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
@@ -37,3 +65,5 @@ services:
 volumes:
   postgres-data:
 
+networks:
+  minishop-network:
