@@ -528,3 +528,22 @@
 - Updated compose.yaml
 - Updated LEARNING.md
 - Updated CHANGELOG.md
+
+---
+
+## Day 30
+
+### Added
+
+- Learned basics of CI/CD.
+- Learned basics of GitHub Actions.
+- Learned the difference between Continuous Delivery and Continuous Deployment.
+- Created .github/workflows/ci.yml
+- Created .env.example
+- New Issue
+
+### Improved
+
+- Updated LEARNING.md
+- Updated CHANGELOG.md
+
