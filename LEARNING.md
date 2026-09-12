@@ -1954,3 +1954,144 @@ And not:
 proxy_pass http://localhost:3000;
 ```
 
+---
+
+# Day 30 - Introduction to CI/CD + GitHub Actions
+
+## What I learned
+
+- Learn basics of CI/CD.
+- Learn basics of GitHub Actions.
+- The difference between Continuous Delivery and Continuous Deployment.
+
+## Challenges
+
+### Challegne 1 - CI/CD
+
+Explain:
+> What is CI?
+And:
+> What is the difference between Continuous Delivery and Continuous Deployment?
+
+Continuous Integration means frequently integrating code changes into a shared repository and automatically building and testing the application to detect problems early.
+Continuous Delivery automatically prepares the software for deployment, but deployment usually requires manual approval. Continuous Deployment automatically deploys the software after the pipeline succeeds.
+
+### Challenge 2 - GitHub Actions
+
+Explain the difference between:
+```YAML
+uses:
+```
+and:
+```YAML
+run:
+```
+
+`uses` runs a reusable GitHub Action, such as `actions/checkout@v4`, while `run` executes a shell command on the runner, such as `npm test`.
+
+### Challenge 3 - Workflow Architecture
+
+Explain the difference between:
+```
+Workflow
+Job
+Step
+Runner
+```
+
+A workflow is a YAML file that defines an automated process in GitHub Actions. It contains triggers and one or more jobs.
+A job is a group of steps that runs on a runner.
+A step is an individual action or shell command inside a job.
+A runner is the machine or environment where the job is executed.
+
+Its structure:
+```
+Workflow
+   │
+   ├── Job 1
+   │    ├── Step
+   │    ├── Step
+   │    └── Step
+   │
+   └── Job 2
+        ├── Step
+        └── Step
+```
+
+### Challenge 4 - npm ci
+
+Why does CI/CD usually use it?
+```Bash
+npm ci
+```
+
+`npm ci` installs dependencies based on the existing `package-lock.json` and is designed for clean, reproducible installations in CI environments. `npm install` is mainly used during development and can create or update the lockfile when necessary.
+
+### Challenge 5 - `needs`
+
+What is this?
+```YAML
+docker-build:
+  needs: backend-test
+```
+What happens if `backend-test` fails?
+
+`needs` defines a dependency between jobs. in this example, `docker-build` runs only after `backend-test` completes successfully. If `backend-test` fails, `docker-build` is skipped.
+
+### Challenge 6 - Docker
+
+Why is this useful in the CI?
+```Bash
+docker build -t minishop-backend:test ./backend
+```
+
+Running `docker build` in CI verfies that the Dockerfile can successfully build the application image in an automated and reproducible environment.
+
+### Challenge 7 - Troubleshooting
+
+Suppose GitHub Actions give this error:
+```
+npm error The `npm ci` command can only install with an existing package-lock.json
+```
+What are you checking?
+
+1. `ls backend/package-lock.json`
+2. Is `package-lock.json` commited?
+3. Does it exist in repository?
+4. Is running workflow in the correct directory?
+5. Is correct `working-directory`?
+6. Is coordinated lockfile with `package.json`?
+
+### Challenge 8 - Production
+
+If:
+```
+Tests → PASS
+Docker Build → PASS
+```
+Can we say application is production-ready surely?
+Why?
+
+Passing CI means that the code has passed the automated checks defined in the pipeline. It does not necessary mean that the application is production-ready. Production readiness also requires security, configuration, monitoring, logging. backups, reliability, deployment, and operational considerations.
+
+## Notes
+
+### GitHub Actions Mental Model
+
+```
+Git Push / Pull Request
+          │
+          ▼
+       Workflow
+          │
+      ┌───┴────┐
+      ▼        ▼
+     Job      Job
+      │
+      ▼
+    Steps
+      │
+      ▼
+    Runner
+```
+
