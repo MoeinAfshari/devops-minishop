@@ -1,4 +1,4 @@
-FROM docker.arvancloud.ir/node:20.0.0-slim
+FROM node:20.0.0-slim
 
 WORKDIR /app
 
