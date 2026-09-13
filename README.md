@@ -2,8 +2,6 @@
 
 A simple Linux-based project for learning DevOps concepts step by step.
 
----
-
 ## Description
 
 MiniShop is a practice project created during 120-day DevOps roadmap.
@@ -22,24 +20,30 @@ This project covers:
 - Monitoring
 - Kubernetes
 
----
-
 ## Project Goals
 
 Learn DevOps from beginner to production-ready level.
 
----
+## Current Tech Stack
 
-## Tech Stack
-
-- React
 - Node.js
 - PostgreSQL
-- Redis
 - Docker
-- Kubernetes
+- Docker Compose
+- Nginx
+- GitHub Actions
 
----
+## Future Plans
+
+- Frontend
+- Redis
+- Ansible
+- Kubernetes
+- Monitoring
+- Advanced tests
+- Container registry automation
+- CD
+- Security scanning
 
 ## Features
 
@@ -49,28 +53,29 @@ Learn DevOps from beginner to production-ready level.
 - Git workflow
 - DevOps documentation
 
----
-
 ## Project Structure
 
-```text
 devops-minishop/
-├── backend/
+├── backend
+├── backups
 ├── CHANGELOG.md
-├── database/
-├── docker/
-├── docs/
-├── frontend/
-├── k8s/
+├── compose.yaml
+├── database
+├── docker
+├── docs
+├── .env
+├── .env.example
+├── frontend
+├── .git
+├── .github
+├── .gitignore
+├── k8s
 ├── LEARNING.md
 ├── LICENSE
-├── monitoring/
-├── nginx/
+├── monitoring
+├── nginx
 ├── README.md
-└── scripts/
-```
-
----
+└── scripts
 
 ## Requirements
 
@@ -78,14 +83,12 @@ devops-minishop/
 - Bash
 - Git
 
----
-
 ## How to Run
 
 Clone repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/MoeinAfshari/devops-minishop.git
 ```
 
 Go to project
@@ -101,7 +104,11 @@ chmod +x scripts/server-info.sh
 ./scripts/server-info.sh
 ```
 
----
+Copy example in .env
+
+```Bash
+cp .env.example .env
+```
 
 ## Git Workflow
 
@@ -117,25 +124,24 @@ feature/user-management
 
 Every feature is merged into the `main` branch through a Pull Request.
 
----
-
 ## Learning Progress
 
 ### Completed
 
-- Linux fundamentals
-- Bash Scripting
+- Linux
+- Bash
 - Git & GitHub
-- Linux Services
-- Process Management
-- User & Group Management
-- Linux Permissions
-- ACL
-
+- Networking Fundamentals
+- Docker
+- Docker Compose
+- PostgreSQL Basics
+- Docker Networking
+- Nginx
+- GitHub Actions CI
 
 ### In Progress
 
-- Networking
+- GitHub Actions CI
 
 ## Future Plans
 
@@ -161,10 +167,23 @@ Current Topics:
 Documentation:
 
 docs/networking/
+├── arp.md
+├── curl.md
+├── dns.md
+├── dns-records.md
+├── hosts-file.md
+├── http-https.md
+├── ipv4.md
+├── ip-vs-mac.md
+├── linux-networking.md
+├── mac-address.md
 ├── network-basics.md
+├── network-troubleshooting.md
+├── ports-and-sockets.md
+├── routing.md
 ├── tcp-ip.md
 ├── tcp-vs-udp.md
-└── ipv4.md
+└── transport-layer.md
 
 ## Scripts
 
@@ -176,11 +195,12 @@ Current scripts:
 
 Project documentation is located in: [docs](docs/)
 
-Current setions:
+Current sections:
 
 - Linux
 - Bash
 - Networking
+- Docker
 
 ## Project Status
 
