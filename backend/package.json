@@ -5,6 +5,10 @@
     "express": "^4.19.2"
   },
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^30.5.1"
   }
 }
