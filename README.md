@@ -186,8 +186,10 @@ Current setions:
 
 Current Stage:
 
-week 2
+Day 30 / 120
 
 Current Topic:
 
-Networking Fundamentals
+CI/CD Fundamentals & GitHub Actions
+
+
