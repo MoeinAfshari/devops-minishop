@@ -573,3 +573,28 @@
 
 - LEARNING documentation
 - CHANGELOG documentation
+
+---
+
+## Day 32
+
+### Added
+
+- Docker image tagging strategy
+- Registry publishing workflow
+- Git SHA image tags
+
+### Improved
+
+- GitHub Actions CI pipeline
+- Container image traceability
+- Registry authentication workflow
+- LEARNING documentation
+- CHANGELOG documentation
+
+### Learned
+
+- Mutable vs immutable tags
+- Build once, run many
+- Registry authentication
+- GitHub Actions permissions
