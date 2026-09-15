@@ -2095,3 +2095,28 @@ Git Push / Pull Request
     Runner
 ```
 
+---
+
+# Day 31 — CI/CD Hardening
+
+## Topics
+- CI quality gates
+- GitHub Actions dependencies
+- Docker healthchecks
+- Docker Compose validation
+- CI troubleshooting
+- Production readiness
+
+## Commands
+- docker compose config
+- docker inspect
+- docker network inspect
+- curl
+- npm test
+
+## Lessons Learned
+- CI PASS does not mean production-ready
+- Tests should run before Docker build
+- package-lock.json should be committed
+- Healthchecks must test a real endpoint
+- Docker Compose should be validated before deployment
