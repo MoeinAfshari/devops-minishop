@@ -77,11 +77,11 @@ jobs:
       - name: Build and tag image
         run: |
           docker build \
-            -t ghcr.io/${{ github.repository_owner }}/minishop-backend:${{ github.sha }} \
-            -t ghcr.io/${{ github.repository_owner }}/minishop-backend:latest \
+            -t ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/minishop-backend:${{ github.sha }} \
+            -t ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/minishop-backend:latest \
             ./backend
 
       - name: Push image
         run: |
-          docker push ghcr.io/${{ github.repository_owner }}/minishop-backend:${{ github.sha }}
-        docker push ghcr.io/${{ github.repository_owner }}/minishop-backend:latest
+          docker push ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/minishop-backend:${{ github.sha }}
+          docker push ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/minishop-backend:latest
