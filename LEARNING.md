@@ -2120,3 +2120,38 @@ Git Push / Pull Request
 - package-lock.json should be committed
 - Healthchecks must test a real endpoint
 - Docker Compose should be validated before deployment
+
+---
+
+# Day 32 — Docker Image Publishing
+
+## Topics
+
+- Docker image tags
+- Mutable vs immutable tags
+- Git SHA tags
+- Container registries
+- Registry authentication
+- GitHub Actions secrets
+- Image publishing
+- Build once, run many
+- Artifact traceability
+
+## Tagging Strategy
+
+- `latest` → mutable convenience tag
+- `<git-sha>` → immutable traceability tag
+
+## CI/CD Flow
+
+Pull Request:
+- Test
+- Docker Build
+- No Image Push
+
+Main Branch:
+- Test
+- Docker Build
+- Tag
+- Push
+
