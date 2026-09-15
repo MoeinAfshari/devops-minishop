@@ -535,15 +535,41 @@
 
 ### Added
 
-- Learned basics of CI/CD.
-- Learned basics of GitHub Actions.
-- Learned the difference between Continuous Delivery and Continuous Deployment.
+- Learned basics of CI/CD
+- Learned basics of GitHub Actions
+- Learned the difference between Continuous Delivery and Continuous Deployment
+- Backend health endpoint
+- Docker healthcheck validation
 - Created .github/workflows/ci.yml
 - Created .env.example
 - New Issue
 
+### Fixed
+
+- package-lock.json tracking
+- Docker Compose network configuration
+- Environment example configuration
+
 ### Improved
 
+- README documentation
+- GitHub Actions CI validation
 - Updated LEARNING.md
 - Updated CHANGELOG.md
 
+---
+
+## Day 31
+
+### Added
+
+- CI/CD hardening
+
+### Fixed
+
+- Docker Compose indentation
+
+### Improved
+
+- LEARNING documentation
+- CHANGELOG documentation
