@@ -55,6 +55,7 @@ Learn DevOps from beginner to production-ready level.
 
 ## Project Structure
 
+```
 devops-minishop/
 ├── backend
 ├── backups
@@ -76,6 +77,7 @@ devops-minishop/
 ├── nginx
 ├── README.md
 └── scripts
+```
 
 ## Requirements
 
