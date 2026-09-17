@@ -2155,3 +2155,40 @@ Main Branch:
 - Tag
 - Push
 
+---
+
+# Day 33 — CD & Deployment Fundamentals
+
+## Topics
+
+- CI vs CD
+- Continuous Delivery
+- Continuous Deployment
+- Deployment artifact
+- Build vs Deploy
+- Recreate deployment
+- Rolling deployment
+- Blue/Green deployment
+- Immutable deployment
+- SHA-based deployments
+- Rollback
+
+## Deployment Flow
+
+Source
+  ↓
+CI
+  ↓
+Docker Image
+  ↓
+Registry
+  ↓
+Deployment Host
+  ↓
+Container
+  ↓
+Health Check
+
+## Important Principle
+
+Build once, run the same artifact across environments.
