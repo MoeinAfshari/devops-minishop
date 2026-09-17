@@ -598,3 +598,22 @@
 - Build once, run many
 - Registry authentication
 - GitHub Actions permissions
+
+---
+
+## Day 33
+
+### Added
+
+- Backend deployment script
+- SHA-based deployment workflow
+- Deployment health verification
+
+### Learned
+
+- CI vs CD
+- Continuous Delivery vs Continuous Deployment
+- Build vs Deploy
+- Immutable deployment
+- Rollback
+- Deployment strategies
