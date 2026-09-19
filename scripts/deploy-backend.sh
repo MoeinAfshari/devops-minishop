@@ -1,38 +1,68 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
-IMAGE="$1"
+IMAGE="${1:-}"
+
 CONTAINER_NAME="minishop-backend"
+PORT="3000"
 
 if [ -z "$IMAGE" ]; then
-  echo "Usage: $0 <image>"
-  exit 1
+    echo "Usage: $0 <image>"
+    exit 1
 fi
 
-echo "Pulling image: $IMAGE"
+echo "================================="
+echo "MiniShop Backend Deployment"
+echo "================================="
+
+echo "Image:"
+echo "$IMAGE"
+
+echo
+echo "Pulling image..."
 docker pull "$IMAGE"
 
-echo "Stoping old container..."
+echo
+echo "Stopping old container..."
 docker stop "$CONTAINER_NAME" 2>/dev/null || true
 
+echo
 echo "Removing old container..."
 docker rm "$CONTAINER_NAME" 2>/dev/null || true
 
+echo
 echo "Starting new container..."
-docker run -d \
-  --name "$CONTAINER_NAME" \
-  -p 3000:3000 \
-  "$IMAGE"
 
+docker run -d \
+    --name "$CONTAINER_NAME" \
+    --restart unless-stopped \
+    -p "${PORT}:3000" \
+    "$IMAGE"
+
+echo
 echo "Checking container..."
 docker ps --filter "name=$CONTAINER_NAME"
 
-echo "Checking health..."
-sleep 5
+echo
+echo "Waiting for application..."
 
-curl -f http://localhost:3000/health
+for i in $(seq 1 15); do
 
-echo ""
-echo "Deployment successful!"
+    if curl -fsS http://127.0.0.1:${PORT}/health >/dev/null; then
+        echo "Application is healthy."
+        echo "Deployment successful."
+        exit 0
+    fi
 
+    echo "Health check failed. Retry $i/15..."
+    sleep 2
+done
+
+echo
+echo "Deployment failed."
+
+echo "Container logs:"
+docker logs --tail 100 "$CONTAINER_NAME" || true
+
+exit 1
