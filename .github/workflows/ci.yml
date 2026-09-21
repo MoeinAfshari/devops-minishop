@@ -1,4 +1,4 @@
-name: MiniShop CI
+ame: MiniShop CI
 
 
 on:
@@ -142,3 +142,4 @@ jobs:
             -i ~/.ssh/id_ed25519 \
             "$DEPLOY_USER@$DEPLOY_HOST" \
             "chmod +x /tmp/deploy-backend.sh && /tmp/deploy-backend.sh '$IMAGE'"
+
