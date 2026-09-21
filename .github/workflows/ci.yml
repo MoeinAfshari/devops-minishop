@@ -117,15 +117,16 @@ jobs:
           chmod 700 ~/.ssh
             
           printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
-          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          #printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
 
           chmod 600 ~/.ssh/id_ed25519
-          chmod 644 ~/.ssh/known_hosts
+          #chmod 644 ~/.ssh/known_hosts
 
       - name: Test SSH connection
         run: |
           ssh \
             -i ~/.ssh/id_ed25519 \
+            -p 2222 \
             "$DEPLOY_USER@$DEPLOY_HOST" \
             "hostname && docker -v"
 
@@ -134,11 +135,13 @@ jobs:
           scp \
             -i ~/.ssh/id_ed25519 \
             scripts/deploy-backend.sh \
+            -p 2222 \
             "$DEPLOY_USER@$DEPLOY_HOST:/tmp/deploy-backend.sh"
 
       - name: Deploy backend
         run: |
           ssh \
             -i ~/.ssh/id_ed25519 \
+            -p 2222 \
             "$DEPLOY_USER@$DEPLOY_HOST" \
             "chmod +x /tmp/deploy-backend.sh && /tmp/deploy-backend.sh '$IMAGE'"
