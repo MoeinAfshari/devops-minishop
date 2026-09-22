@@ -2192,3 +2192,42 @@ Health Check
 ## Important Principle
 
 Build once, run the same artifact across environments.
+
+---
+
+# Day 34 — Deployment Automation & SSH
+
+## Topics
+
+- SSH deployment
+- SSH keys
+- Public/private keys
+- authorized_keys
+- Remote Docker commands
+- Deployment scripts
+- GitHub Actions deployment
+- SSH host verification
+- Deployment health checks
+- Remote troubleshooting
+
+## Deployment Flow
+
+GitHub Actions
+    ↓
+SSH
+    ↓
+Deployment Host
+    ↓
+docker pull
+    ↓
+deploy-backend.sh
+    ↓
+health check
+
+## Security
+
+- Private SSH keys must not be committed
+- Use GitHub Secrets
+- Verify SSH host keys
+- Use least-privilege deployment users
+- Avoid hard-coded credentials
