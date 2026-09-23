@@ -1,7 +1,9 @@
 .env
+.env.*
+!.env.example
 
 backups/*.sql
 backups/*.sql.gz
 backups/*.tar.gz
 
-backend/node_modules
+node_modules/
