@@ -640,3 +640,27 @@
 - GitHub Actions deployment architecture
 - LEARNING documentation
 - CHANGELOG documentation
+
+---
+
+## Day 35
+
+### Added
+
+- Environment configuration for MiniShop
+- Secure secret management workflow
+- Secret rotation procedure
+
+### Improved
+
+- GitHub Actions credential handling
+- Docker runtime configuration
+- Deployment security
+- LEARNING documentation
+- CHANGELOG documentation
+
+### Security
+
+- Removed hard-coded sensitive values
+- Added environment examples
+- Applied least-privilege principles

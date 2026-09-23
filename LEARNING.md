@@ -2231,3 +2231,32 @@ health check
 - Verify SSH host keys
 - Use least-privilege deployment users
 - Avoid hard-coded credentials
+
+---
+
+# Day 35 — Secrets & Environment Management
+
+## Topics
+
+- Secrets vs variables
+- Environment variables
+- .env
+- .env.example
+- Runtime configuration
+- Build-time vs runtime configuration
+- GitHub Actions secrets
+- GitHub Actions variables
+- Secret rotation
+- Least privilege
+- Registry credentials
+
+## Security Rules
+
+- Never hard-code secrets
+- Never commit `.env`
+- Commit `.env.example`
+- Use GitHub Secrets for sensitive CI/CD values
+- Use Variables for non-sensitive configuration
+- Rotate leaked credentials
+- Use least privilege
+- Never print secrets in logs
