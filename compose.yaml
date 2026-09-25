@@ -17,7 +17,7 @@ services:
       resources:
         limits:
           cpus: "1.0"
-          memory: 1G
+          memory: 512M
 
     networks:
       - minishop-network
@@ -75,6 +75,12 @@ services:
 
     container_name: 
       minishop-postgres
+
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1G
 
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
