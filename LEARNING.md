@@ -2260,3 +2260,28 @@ health check
 - Rotate leaked credentials
 - Use least privilege
 - Never print secrets in logs
+
+---
+
+# Day 37 — Production Docker Compose
+
+## Topics
+
+- Restart policies
+- Healthchecks
+- depends_on
+- Service readiness
+- Service isolation
+- Docker networking
+- Resource limits
+- Container availability
+- Application availability
+
+## Production Principles
+
+- Running does not always mean healthy
+- depends_on does not guarantee readiness
+- Internal services should not be unnecessarily exposed
+- Services should have restart policies
+- Critical services should have healthchecks
+- Resource usage should be bounded
