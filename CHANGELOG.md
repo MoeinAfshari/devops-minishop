@@ -690,3 +690,25 @@
 - Semantic versioning
 - Known-good artifacts
 - Application vs database rollback
+
+---
+
+## Day 37
+
+### Improved
+
+- Production Docker Compose configuration
+- Service restart policies
+- PostgreSQL readiness checks
+- Backend healthchecks
+- Service isolation
+- Container resource management
+- LEARNING documentation
+- CHANGELOG documentation
+
+### Learned
+
+- depends_on vs healthcheck
+- Container vs application health
+- Docker resource limits
+- Production Compose troubleshooting
