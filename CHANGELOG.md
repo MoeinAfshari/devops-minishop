@@ -664,3 +664,29 @@
 - Removed hard-coded sensitive values
 - Added environment examples
 - Applied least-privilege principles
+
+---
+
+## Day 36
+
+### Added
+
+- Release versioning strategy
+- SHA-based release traceability
+- Rollback procedure
+- Deployment version tracking
+
+### Improved
+
+- Deployment reliability
+- Artifact traceability
+- Recovery procedures
+- LEARNING documentation
+- CHANGELOG documentation
+
+### Learned
+
+- Release vs deployment
+- Semantic versioning
+- Known-good artifacts
+- Application vs database rollback
