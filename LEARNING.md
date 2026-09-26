@@ -2260,3 +2260,36 @@ health check
 - Rotate leaked credentials
 - Use least privilege
 - Never print secrets in logs
+
+---
+
+# Day 36 — Release Management & Rollback
+
+## Topics
+
+- Release vs Deployment
+- Semantic Versioning
+- Git SHA tagging
+- Release history
+- Artifact traceability
+- Known-good artifacts
+- Rollback
+- Artifact retention
+- Database compatibility
+- Deployment history
+
+## Release Strategy
+
+Docker Image Tags:
+- latest
+- Git SHA
+- Semantic Version
+
+Production deployment:
+- Prefer SHA or explicit version
+- Avoid relying on latest
+
+## Rollback Principle
+
+Rollback should deploy an existing known-good artifact.
+Do not rebuild the old version unless there is a specific reason.
