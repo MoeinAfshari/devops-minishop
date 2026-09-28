@@ -712,3 +712,28 @@
 - Container vs application health
 - Docker resource limits
 - Production Compose troubleshooting
+
+---
+
+## Day 38
+
+### Added
+
+- PostgreSQL backup and recovery documentation
+- .gitkeep file in backups directory
+
+### Improved
+
+- Update gitignore file
+- Change backup postgres script to a custom format backup
+- Update LEARNING documentation
+- Update CHANGELOG documentation
+
+### Learned
+
+- Get backup from PostgreSQL
+- Understand the difference between SQL backup and Custom-format backup
+- Verify and checksum backup
+- Restore backup on a new database
+- Understand retention and add retention for backup
+- Understand RPO & RTO concepts in real scenario
