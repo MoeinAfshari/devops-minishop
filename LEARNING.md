@@ -2318,3 +2318,20 @@ Do not rebuild the old version unless there is a specific reason.
 - Services should have restart policies
 - Critical services should have healthchecks
 - Resource usage should be bounded
+
+---
+
+# Day 38 - PostgreSQL Backup and Recovery
+
+## Topics
+
+- Get backup from PostgreSQL with `pg_dump`
+- Know the difference between SQL backup and Custom-format backup
+- Verify backup
+- Restore backup on a new database
+- Know the difference between Docker Volume backup and PostgreSQL logical backup
+- Have retention for backup
+- Write a real backup script for MiniShop
+- Test "Have backup" really, no nust say 'recovery'
+- Understand RPO & RTO concepts in real scenario
+
