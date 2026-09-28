@@ -2,8 +2,7 @@
 .env.*
 !.env.example
 
-backups/*.sql
-backups/*.sql.gz
-backups/*.tar.gz
+backups/*
+!backups/.gitkeep
 
 node_modules/
