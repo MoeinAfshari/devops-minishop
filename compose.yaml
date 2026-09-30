@@ -28,6 +28,12 @@ services:
     build:
       context: ./backend
 
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
     container_name: 
       minishop-backend
 
