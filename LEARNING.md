@@ -2335,3 +2335,24 @@ Do not rebuild the old version unless there is a specific reason.
 - Test "Have backup" really, no nust say 'recovery'
 - Understand RPO & RTO concepts in real scenario
 
+---
+
+# Day 39 - Logging & Log Management
+
+## Topics
+
+- Understand the difference between `stdout` and `stderr`
+- Filter & read Docker logs
+- Check MiniShop service logs separately
+- Analyze Nginx access/error logs
+- Find & check PostgreSQL logs
+- Check backend from application logs
+- Understand severity and timestamp
+- Separate important noises from log
+- Understand `log rotation` concept
+- Prevent disk from filling up due to logs
+- Check an incident just with evidence
+- Improve Logging configuration in Compose
+- Write a simple runbook for troubleshooting
+- Document Logging in MiniShop
+
