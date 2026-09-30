@@ -737,3 +737,23 @@
 - Restore backup on a new database
 - Understand retention and add retention for backup
 - Understand RPO & RTO concepts in real scenario
+
+---
+
+## Day 39
+
+### Added
+
+- PostgreSQL, backend, and Nginx logging documentation
+- Log summary troubleshooting script
+- Docker log rotation configuration
+
+### Improved
+
+- Compose file
+- CHANGELOG documentation
+- LEARNING documentation
+
+### Learned
+
+- Practiced production incident investigation using logs
