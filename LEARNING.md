@@ -2356,3 +2356,22 @@ Do not rebuild the old version unless there is a specific reason.
 - Write a simple runbook for troubleshooting
 - Document Logging in MiniShop
 
+---
+
+# Day 40 - Monitoring & Observability
+
+## Topics
+
+- Explain the difference between Logging / Monitoring / Observability
+- Recognize Metric, Log and Trace
+- Monitor CPU / RAM / Disk / Network
+- Check container health and resource usage
+- Understand time series concept
+- Understand Promeheus concept
+- Understand metric scraping
+- Get container metrics with cAdvisor
+- Get host metrics with Node Exporter
+- Create dashboard with Granfa
+- Define a simple alert for resource usage
+- Use from monitoring to incident investigation
+- Add and document monitoring to MiniShop

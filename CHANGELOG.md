@@ -757,3 +757,25 @@
 ### Learned
 
 - Practiced production incident investigation using logs
+
+---
+
+## Day 40 
+
+### Added
+
+- Rrometheus and Grafana directroies in monitoring directroy
+- Prometheus configuration yaml file
+- Monitoring documentation
+
+### Improved
+
+- Compose file
+- LEARNING documentation
+- ChANGELOG documentation
+
+### Learned
+
+- Monitoring and Observability
+- Prometheus, Node Exporter and cAdvisor
+- Basics of Grafana & create a simple dashboard

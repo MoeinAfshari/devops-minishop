@@ -101,8 +101,59 @@ services:
       
     restart: unless-stopped
 
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    networks:
+      - minishop-network
+
+  cadvisor:
+    image: ghcr.io/google/cadvisor:v0.60.2
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - minishop-network
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+    ports:
+      - "9100:9100"
+    networks:
+      - minishop-network
+
+  grafana:
+    image: grafana/grafana:13.1.7
+    container_name: minishop-grafana
+    restart: unless-stopped
+    volumes:
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "3001:3000"
+    networks:
+      - minishop-network
+
 volumes:
   postgres-data:
+  grafana_data:
 
 networks:
   minishop-network:
