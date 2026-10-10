@@ -779,3 +779,29 @@
 - Monitoring and Observability
 - Prometheus, Node Exporter and cAdvisor
 - Basics of Grafana & create a simple dashboard
+
+---
+
+## Day 41
+
+### Added
+
+- Hardened MiniShop Docker backend configuration
+- Reviewed SSH security and least privilege
+- Reviewed firewall and network exposure
+- Added security verification script
+- Documented MiniShop security hardening
+
+### Added Files
+
+- docs/security-hardening.md
+- scripts/security-check.sh
+
+### Modified Files
+
+- compose.yaml
+- nginx/Dockerfile
+- scripts/README.md
+- backups/.gitkeep
+- LEARNING.md
+- CHANGELOG.md
