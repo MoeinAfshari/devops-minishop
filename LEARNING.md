@@ -29,7 +29,7 @@ Practice/
 ├── Git/
 └── Docker/
 ```
-2. Installed Ubuntu, Git, Vs Code, Docker Engine or Docker Desktop, Node.js, PostgreSQL, Redis
+2. Installed Ubuntu, Git, VS Code, Docker Engine or Docker Desktop, Node.js, PostgreSQL, Redis
 3. Created repository (devops-minishop in github)
 4. Created Issues
 
@@ -64,18 +64,6 @@ Practice/
 - getent
 - userdel
 - groupdel
-
-## Challenges
-
-1. What's difference between chmod 777 and chmod 755?
-```
-777 = rwx rwx rwx
-755 = rwx r-x r-x
-7 = 4 + 2 + 1
-Read = 4, Write = 2, Execute = 1
-```
-2. Why doesn't recommend "chmod 777" in a production? `Principle of Last Privilege`
-3. What's difference between Owner & Group? `Owner is current owner of a file or directory that is one user but Group is current group of file or directory that includes some users in the group and they have group access permissions.`
 
 ## Notes
 
@@ -2375,3 +2363,26 @@ Do not rebuild the old version unless there is a specific reason.
 - Define a simple alert for resource usage
 - Use from monitoring to incident investigation
 - Add and document monitoring to MiniShop
+
+---
+
+# 41 - Linux & Docker Security Hardening
+
+## Target of day
+
+- Put the principle of least privilege into practice.
+- Make SSH more secure on Linux.
+- Limit Root login.
+- Turn off password authentication after verifying the SSH key.
+- Configure UFW correctly without locking yourself out.
+- Find and close unnecessary ports.
+- Understand the difference between host exposure and container internal communication.
+- Keep secrets and `.env` more secure.
+- Adjust permissions for sensitive files.
+- Run the Docker container as a non-root user.
+- Check Compose for security.
+- Understand `cap_drop` and `no-new-privileges`.
+- Know image scanning and image pinning.
+- Investigate a security incident.
+- Connect monitoring/logging to security.
+
