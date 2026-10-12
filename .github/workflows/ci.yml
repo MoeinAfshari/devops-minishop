@@ -12,7 +12,6 @@ on:
 
 permissions:
   contents: read
-  packages: write
 
 jobs:
 
@@ -42,6 +41,9 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Run ESLint
+        run: npm run lint
+
   backend-docker-build:
     name: Backend Docker Build
     runs-on: ubuntu-latest
@@ -57,11 +59,16 @@ jobs:
         run: docker build -t minishop-backend:ci ./backend
 
   backend-publish:
+    permissions:
+      contents: read
+      packages: write
+
     name: Publish Backend Image
     runs-on: ubuntu-latest
 
     needs:
       - backend-test
+      - backend-docekr-build
 
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
@@ -99,7 +106,6 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     env:
-      IMAGE: ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/minishop-backend:${{ github.sha }}
       DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
       DEPLOY_USER: ${{ vars.DEPLOY_USER }}
       DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
@@ -109,6 +115,11 @@ jobs:
         
       - name: checkout repository
         uses: actions/checkout@v4
+
+      - name: Set image name
+        shell: bash
+        run: |
+          echo "IMAGE=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/minishop-backend:${GITHUB_SHA}" >> "$GITHUB_ENV"
 
       - name: Configure SSH
         shell: bash
