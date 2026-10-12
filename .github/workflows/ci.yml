@@ -68,7 +68,7 @@ jobs:
 
     needs:
       - backend-test
-      - backend-docekr-build
+      - backend-docker-build
 
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
