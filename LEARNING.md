@@ -2386,3 +2386,8 @@ Do not rebuild the old version unless there is a specific reason.
 - Investigate a security incident.
 - Connect monitoring/logging to security.
 
+---
+
+# 42 - CI/CD Production Capstone
+
+- CI/CD Production capstone means completing the MiniShop project release chain with GitHub Actions, Docker, GHCR, and your own Deploy environment.
