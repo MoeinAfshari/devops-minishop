@@ -805,3 +805,20 @@
 - backups/.gitkeep
 - LEARNING.md
 - CHANGELOG.md
+
+---
+
+## Day 42
+
+### Added
+
+- Add CI/CD Documentation directory - docs/ci-cd/
+
+### Learned
+
+- CI/CD Production Capstone
+
+### Improved
+
+- Update LEARNING.md
+- Update CHANGELOG.md
