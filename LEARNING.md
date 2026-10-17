@@ -2391,3 +2391,23 @@ Do not rebuild the old version unless there is a specific reason.
 # 42 - CI/CD Production Capstone
 
 - CI/CD Production capstone means completing the MiniShop project release chain with GitHub Actions, Docker, GHCR, and your own Deploy environment.
+
+---
+
+# Day 43 - Terraform Fundamentals & Infrastructure as Code
+
+## Targets of day
+
+- What's IaC or Infrastructure as Code and what does terraform do?
+- Understand the difference between Output, Variable, Resource, Provider and State.
+- Define a simple and real resource with terraform.
+- Understand the meaninig of every parameter and you can change what parameters.
+- Use orderly from: `init -> validate -> plan -> apply`.
+- Check Plan, before implementing changes.
+- Understand how does terraform compare desired state with recorded state.
+- Create a small and independent lab and then apply those same skills in a separate section of the MiniShop.
+- Specify temporary files, State and dependency fils.
+
+Today's rule of thumb: Always know what you are going to create, change, or delete before youo run terraform apply. Terraform will run the apply command without a separate previous Plan; in
+that case, it will generate the Plan itself and display it for approval.
+
