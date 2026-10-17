@@ -822,3 +822,24 @@
 
 - Update LEARNING.md
 - Update CHANGELOG.md
+
+---
+
+## Day 43
+
+### Added
+
+- `infra/terraform/local-lab` directory
+- A local terraform lab includes: `main.tf`, `versions.tf`, `variables.tf`, `outputs.tf` and `README.md`
+
+### Learned
+
+- Terraform fundamentals
+- Infrastructure as Code
+- Difference between Output, Variable, Resource, Provider and State.
+- Cycle of `init->validate->plan->apply` in terraform
+
+### Improved
+
+- Update LEARNING.md
+- Update CHANGELOG.md
