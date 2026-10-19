@@ -2411,3 +2411,16 @@ Do not rebuild the old version unless there is a specific reason.
 Today's rule of thumb: Always know what you are going to create, change, or delete before youo run terraform apply. Terraform will run the apply command without a separate previous Plan; in
 that case, it will generate the Plan itself and display it for approval.
 
+---
+
+# Day 44 - Variables, local values and outputs in Terraform
+
+## Targets of day
+
+- Explain the difference between input variable, local value and output.
+- Define type, default value and verification for variables.
+- Change the value of variables without directly changing the code.
+- Know Terraform input files.
+- Improve MiniShop configuration with these concepts.
+- Review the proposed Terraform plan, before applying changes.
+
