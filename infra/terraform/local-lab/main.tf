@@ -1,5 +1,13 @@
+locals {
+  status_content = join("\n", [
+    "Application: ${var.project_name}",
+    "Environment: ${var.environment_name}",
+    "Purpose: Terraform local lab only"
+  ])
+}
+
 resource "local_file" "minishop_status" {
   filename        = "${path.module}/generated/minishop-lab-status.txt"
-  content         = "MiniShop local IaC lab\nEnvironment: ${var.environment_name}\nPurpose: Terraform practice only\n"
+  content         = "${local.status_content}\n"
   file_permission = "0644"
 }

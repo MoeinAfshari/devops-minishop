@@ -843,3 +843,26 @@
 
 - Update LEARNING.md
 - Update CHANGELOG.md
+
+---
+
+## Day 44
+
+### Added
+
+- Example of input variables `infra/terraform/local-lab/dev.tfvars.example`
+- Scenarios directory according to titles
+- Day 44 challenges `challenges/44.md`
+
+### Learned
+
+- The difference between input variable, local value and output.
+- Definition of type, default value, and verification for variables.
+- Knowing Terraform input files.
+
+### Improved
+
+- `main.tf`, `outputs.tf`, `variables.tf` in the `infra/terraform/local-lab`
+- Challenges for days 2 to 6 in the challenges directory
+- LEARNING.md
+- CHANGELOG.md
