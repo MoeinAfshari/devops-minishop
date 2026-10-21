@@ -11,3 +11,8 @@ resource "local_file" "minishop_status" {
   content         = "${local.status_content}\n"
   file_permission = "0644"
 }
+
+moved {
+  from = local_file.minishop_lab
+  to = local_file.minishop_status
+}
