@@ -90,3 +90,75 @@ terraform init -lockfile=readonly
 terraform init -upgrade
 ```
 
+### Scenario 3 - Unexpected Replacement
+
+#### Scenario
+
+A team member has changed the name of a resource within a Terrform file. Upon running `terraform plan`, Terraform proposed deletion the existing resource and creating  a new one whereas the team's sole intention was to rename it.
+
+#### Your Task
+
+Your task is to outline the troubleshooting steps. Explain what information you would examine within the configuration and state, how you would assess the risks associated with the proposed operation, and under what conditions you would proceed `terraform apply`.
+
+##### Answer
+
+```Bash
+# Desired configuration
+cat main.tf
+
+# Actual file
+ls -l generated/minishop-lab-status.txt
+cat generated/minishop-lab-status.txt
+
+# Recorded state
+terraform state list
+terraform state show local_file.minishop_status
+
+# Proposed reconciliation
+terraform plan
+```
+Next, if you are renaming a Terraform resource, don't automatically delete and recreate it. First determine whether this is only a resource-address change or whether its actual attributes also need changing. Use a moved block when appropriate, then verify the proposed actions in the plan.
+
+For a repeatable apply workflow, use a saved plan:
+```Bash
+terraform fmt
+terraform validate
+terraform plan -out=tfplan
+terraform show tfplan
+terraform apply tfplan
+```
+This lets you inspect the actual saved plan before applying that specific plan. Afterward, check the file, the resource address, and the state again.
+
+### Scenario 4 - Missing State on Another System
+
+#### Scenario
+
+A team member has received the MiniShop repository on another system. The Terraform files are there, but the terraform state list resource is not showing the expected one. A team member suggests running `terraform apply -auto-approve` immediately.
+
+#### Your Task
+
+Write a diagnostic program without running Apply. Check the current path, backend, workspace, state, and existence of the actual resource. Explain how you would prevent unwanted creation or replacement.
+
+#### Answer
+
+```Bash
+git status
+git check-ignore -v terraform.tfstate dev.tfvars
+git ls-files '*.tfstate' '*.tfvars'
+git rev-parse --show-toplevel
+cd "$(git rev-parse --show-toplevel)"
+cd infra/terraform/local-lab
+pwd
+ls -la
+terraform state list
+terraform state show local_file.minishop_status
+ls -la generated/
+terraform show
+terraform output
+cat generated/minishop-lab-status.txt
+cat .gitignore
+cat .terraform.lock.hcl
+terraform plan
+```
+First, I find the problem and I try to solve it.
+
