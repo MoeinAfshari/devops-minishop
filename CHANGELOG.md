@@ -866,3 +866,28 @@
 - Challenges for days 2 to 6 in the challenges directory
 - LEARNING.md
 - CHANGELOG.md
+
+---
+
+## Day 45
+
+### Added
+
+- Moved block for change name of a the resource
+- Linux server production scenarios: `Scenarios/1.linux_server.md`
+- Review challenges documentations: `challenges/7.md` & `challenges/8.md`
+- Day 45 challenges: `challenges/45.md`
+
+### Learned
+
+- Drift detection & moved block in Terraform
+
+### Improved
+
+- `infra/terraform/local-lab/.gitignore`
+- `infra/terraform/local-lab/README.md`
+- `infra/terraform/local-lab/main.tf`
+- `scenarios/terraform.md`
+- `LEARNING.md`
+- `CHANGELOG.md`
+
