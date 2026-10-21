@@ -2424,3 +2424,9 @@ that case, it will generate the Plan itself and display it for approval.
 - Improve MiniShop configuration with these concepts.
 - Review the proposed Terraform plan, before applying changes.
 
+# Day 45 - Terraform State & Drift Detection
+
+## Target of day
+
+- Learn how Terraform keeps track of its resources, maintains their information in state, and detects changes made outside of Terraform.
+
