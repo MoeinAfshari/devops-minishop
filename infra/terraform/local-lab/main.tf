@@ -1,18 +1,11 @@
-locals {
-  status_content = join("\n", [
-    "Application: ${var.project_name}",
-    "Environment: ${var.environment_name}",
-    "Purpose: Terraform local lab only"
-  ])
-}
-
-resource "local_file" "minishop_status" {
-  filename        = "${path.module}/generated/minishop-lab-status.txt"
-  content         = "${local.status_content}\n"
-  file_permission = "0644"
+module "status_file" {
+  source          = "./modules/status_file"
+  filename        = local.status_file_path
+  content         = var.status_content
+  file_permission = var.status_file_permission
 }
 
 moved {
-  from = local_file.minishop_lab
-  to = local_file.minishop_status
+  from = local_file.minishop_status
+  to   = module.status_file.local_file.status
 }
