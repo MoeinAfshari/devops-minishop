@@ -22,3 +22,15 @@ variable "environment_name" {
     error_message = "environment_name must be development, staging or production."
   }
 }
+
+variable "status_content" {
+  description = "Content of the MiniShop status file."
+  type        = string
+  default     = "Application: minishop\nEnvironment: development\nPurpose: Terraform local lab only"
+}
+
+variable "status_file_permission" {
+  description = "Permission of the status file."
+  type        = string
+  default     = 0644
+}

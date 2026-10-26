@@ -168,3 +168,16 @@ After completing this lab, I should be able to:
 - Recognize potential drift between configuration and real resources.
 - Keep local state files and sensitive inputs out of Git.
 
+### Root & Child modules
+
+#### Purpose of Root Module and Child Module 
+
+#### Module Responsibilities Related to State File 
+
+#### Module Variables and Outputs 
+
+#### Reason for Using Moved Block 
+
+#### Init, Plan and Apply Execution Method 
+
+#### File Verification Method and State
