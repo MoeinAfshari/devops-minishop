@@ -891,3 +891,41 @@
 - `LEARNING.md`
 - `CHANGELOG.md`
 
+---
+
+## Day 46
+
+### Added
+
+- status_file child module
+- locals file of root module
+- `infra/terraform/local-lab/modules/status_file/` directory
+- `infra/terraform/local-lab/locals.tf` file
+
+### Learned
+
+- Terraform modules & safe Refactoring
+
+### Improved
+
+- README.md, main.tf, outputs.tf, variables.tf files from `infra/terraform/local-lab`
+
+---
+
+## Day 47
+
+### Added
+
+- `docs/terraform-lifecyle-audit.md` documentation file
+- `challenges/46.md` challenge file
+- `challenges/47.md` challenge file
+
+### Learned
+
+- Terraform Lifecycle & IaC Capstone
+
+### Improved
+
+- `LEARNING.md`
+- `CHANGELOG.md`
+- `scenarios/terraform.md`

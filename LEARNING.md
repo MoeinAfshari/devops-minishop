@@ -2430,3 +2430,52 @@ that case, it will generate the Plan itself and display it for approval.
 
 - Learn how Terraform keeps track of its resources, maintains their information in state, and detects changes made outside of Terraform.
 
+---
+
+# Day 46 - Terraform modules & Safe Refactoring
+
+## Targets of day
+
+- Explain Root Module & Child Module concepts
+- Create a local module & use it
+- Understand the difference between Input variables, Local variables & Output vairables
+- Transfer an existing resource to the module structure
+- With moved block, you can change the address of a resource without destroying it unnecessarily.
+- Check the result of the changes with `terraform plan`, `terraform apply` and `terraform state`
+- Have a safe & repeatable workflow for refactoring
+
+Today's important principle:
+We change the configuration structure, but the expected behavior of the project must be preserved; unless we deliberately decide to change it.
+
+---
+
+# Day 47 - Terraform Lifecycle & IaC Capstone
+
+## Targets of day
+
+- Recognize the difference between Create, Update, Destroy and Replace.
+- Prevent some unwanted deletions and replacements with `prevent_destroy`.
+- Use `precondition` to check that the necessary conditions for executing an operation are met.
+- Explain the difference between `create_before_destroy`, `ignore_changes` and `replace_triggered_by`.
+- Check the difference between the actual state of a file and the information recorded in Terraform state.
+- Analyze Terraform changes without hastily executing Apply.
+- Review and document the current state of the IaC part of the MiniShop project, without making dangerous or unnecessary changes to the project.
+
+## Prerequisites
+
+- Configuration: Terraform configuration files where you specify which resources should be present.
+- State: Information that Terraform keeps to record the resources it manages.
+- Plan: A report of the changes that Terraform intends to make if approved.
+- Apply: The stage that implements approved changes.
+- Module: A part of Terraform code that can have a specific task and be used in different parts of a project.
+- Resource Address: The address by which Terraform identifies a resource in configuration and state. If the resource is inside a module, its address can also include the module path.
+
+### Initial check the environment
+
+```Bash
+terraform version
+git --version
+find --version
+mktemp --version
+```
+
