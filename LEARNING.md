@@ -2479,3 +2479,25 @@ find --version
 mktemp --version
 ```
 
+# Day 48 - CI/CD Audit & Reproducible Local Quality Gate
+
+## Targets of day
+
+- Identify the main components of a CI/CD workflow.
+- Examine existing MiniShop workflows, without assuming they have a sepecific structure.
+- Explain the difference between local review, CI and deployment.
+- Create a Local CI Quality Gate that performs basic project reviews.
+- Identify a failed review and ensure the error is not hidden.
+- Record the audit results in a documentation file.
+- Identify which reviews have succeeded, which have failed and which have not yet been implemented.
+
+## Technical prerequisites
+
+```Bash
+git --version
+bash --version
+docker --version
+docker compose version
+terraform version
+```
+
